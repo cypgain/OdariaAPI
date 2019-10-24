@@ -7,11 +7,13 @@ import org.redisson.config.Config;
 
 public class RedisAccess {
     public static RedisAccess INSTANCE;
+    public static String CHANNEL;
 
     private RedissonClient redissonClient;
 
     public RedisAccess(RedisCredentials redisCredentials) {
         INSTANCE = this;
+        CHANNEL = "Odaria:ToBungee";
         this.redissonClient = initRedisson(redisCredentials);
     }
 

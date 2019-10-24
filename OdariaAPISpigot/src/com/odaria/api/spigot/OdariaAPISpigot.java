@@ -16,6 +16,10 @@ public class OdariaAPISpigot extends JavaPlugin {
         ConsoleManager.infoMessage("Redis loading...");
         RedisAccess.init();
         ConsoleManager.successMessage("Redis loaded");
+
+        ConsoleManager.infoMessage("Listeners loading...");
+        loadListeners();
+        ConsoleManager.successMessage("Listeners loaded");
     }
 
     @Override
