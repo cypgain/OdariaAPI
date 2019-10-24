@@ -1,0 +1,4 @@
+name: OdariaAPIBungee
+version: 1.0
+author: OdariaMC
+main: com.odaria.api.bungee.OdariaAPIBungee

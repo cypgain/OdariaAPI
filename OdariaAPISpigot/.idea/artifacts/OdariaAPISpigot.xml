@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OdariaAPISpigot">
+    <output-path>$PROJECT_DIR$/../../Network/servers/hub/plugins</output-path>
+    <root id="archive" name="OdariaAPISpigot.jar">
+      <element id="module-output" name="OdariaAPISpigot" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../OdariaAPICommons/OdariaAPICommons.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

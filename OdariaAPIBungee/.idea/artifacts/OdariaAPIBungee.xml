@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OdariaAPIBungee">
+    <output-path>$PROJECT_DIR$/../../Network/bungeecord/plugins</output-path>
+    <root id="archive" name="OdariaAPIBungee.jar">
+      <element id="module-output" name="OdariaAPIBungee" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../OdariaAPICommons/OdariaAPICommons.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Librairies/HikariCP-3.4.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
