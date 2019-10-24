@@ -1,4 +1,4 @@
-package com.odaria.api.bungee.listeners;
+package com.odaria.api.bungee.listeners.game;
 
 import com.odaria.api.bungee.core.AccountProvider;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;

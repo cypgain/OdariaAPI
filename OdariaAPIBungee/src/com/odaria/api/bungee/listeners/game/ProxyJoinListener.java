@@ -1,4 +1,4 @@
-package com.odaria.api.bungee.listeners;
+package com.odaria.api.bungee.listeners.game;
 
 import com.odaria.api.bungee.OdariaAPIBungee;
 import com.odaria.api.bungee.core.AccountProvider;
