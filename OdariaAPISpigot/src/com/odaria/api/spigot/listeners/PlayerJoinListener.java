@@ -14,12 +14,15 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
+
         Bukkit.getScheduler().runTaskAsynchronously(OdariaAPISpigot.INSTANCE, () -> {
             final RedisAccess redisAccess = RedisAccess.INSTANCE;
             final RedissonClient redissonClient = redisAccess.getRedissonClient();
             final RBucket<Account> accountRBucket = redissonClient.getBucket("account:" + event.getPlayer().getDisplayName());
             final Account account = accountRBucket.get();
         });
+
+
     }
 
 }

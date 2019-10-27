@@ -7,51 +7,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ebd2c55e-25f1-41ca-93da-ad2e9241b7b5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/account/LoadAccountFromDatabaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/account/SaveAccountToDatabaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/AcceptFriendRequestListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/DenyFriendRequestListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/SendFriendRequestListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OdariaAPICommons/src/com/odaria/api/commons/core/FriendRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/anvilgui/AnvilGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/anvilgui/VersionWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/core/AccountProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/AcceptFriendRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/DenyFriendRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/SendFriendRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/gui/friends/FriendRequestAcceptGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/gui/friends/FriendsRequestsGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/guimanager/GUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/guimanager/GUIManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/account/LoadAccountFromDatabaseSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/account/SaveAccountToDatabaseSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/commands/CloseAllServersCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/commands/LoadAccountFromDatabaseCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/commands/SaveAccountToDatabaseCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/commands/SeeAllServersCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/RemoveFriendListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/server/ChangeServerStateListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/server/SendMaxPlayersListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/coins/GetCoins.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/coins/GiveCoins.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/coins/RemoveCoins.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/coins/SetCoins.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/commands/TestCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/NewFriendRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/OpenFriendsGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/RemoveFriend.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/gui/friends/FriendActionGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/gui/friends/FriendsGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/server/SendMaxPlayersSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/OdariaAPIBungee.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/OdariaAPIBungee.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/core/AccountProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/core/AccountProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/game/ProxyJoinListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/game/ProxyJoinListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/game/ProxyQuitListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/game/ProxyQuitListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/ChangeServerStateListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/ChangeServerStateListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/RedisPubSubListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/RedisPubSubListener$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/RedisPubSubListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/RedisPubSubListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/servers/ServersManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/servers/ServersManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/servers/ServersManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/servers/ServersManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/friends/AcceptFriendRequestListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/friends/AcceptFriendRequestListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/friends/DenyFriendRequestListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/friends/DenyFriendRequestListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/friends/SendFriendRequestListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/out/production/OdariaAPIBungee/com/odaria/api/bungee/listeners/redis/friends/SendFriendRequestListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/OdariaAPIBungee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/OdariaAPIBungee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/core/AccountProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/core/AccountProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/game/ProxyJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/game/ProxyJoinListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/game/ProxyQuitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/game/ProxyQuitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/ChangeServerStateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/ChangeServerStateListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/ChangeServerStateListener.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/RedisPubSubListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/RedisPubSubListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/AcceptFriendRequestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/AcceptFriendRequestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/DenyFriendRequestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/DenyFriendRequestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/SendFriendRequestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/listeners/redis/friends/SendFriendRequestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/servers/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/servers/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/servers/ServersManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPIBungee/src/com/odaria/api/bungee/servers/ServersManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPICommons/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/OdariaAPICommons.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPICommons/OdariaAPICommons.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/out/production/OdariaAPICommons/com/odaria/api/commons/core/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPICommons/out/production/OdariaAPICommons/com/odaria/api/commons/core/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/out/production/OdariaAPICommons/com/odaria/api/commons/core/FriendRequest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/out/production/OdariaAPICommons/com/odaria/api/commons/message/MessageAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPICommons/out/production/OdariaAPICommons/com/odaria/api/commons/message/MessageAction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/src/com/odaria/api/commons/core/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPICommons/src/com/odaria/api/commons/core/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/src/com/odaria/api/commons/core/FriendRequest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../OdariaAPICommons/src/com/odaria/api/commons/message/MessageAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OdariaAPICommons/src/com/odaria/api/commons/message/MessageAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/OdariaAPISpigot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/OdariaAPISpigot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/senders/ChangeServerStateSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/senders/ChangeServerStateSender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/friends/AcceptFriendRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/friends/AcceptFriendRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/friends/DenyFriendRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/friends/DenyFriendRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/friends/SendFriendRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/friends/SendFriendRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/gui/friends/FriendsRequestsGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/gui/friends/FriendsRequestsGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/listeners/PlayerJoinListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/listeners/PlayerJoinListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/senders/ChangeServerStateSender.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/senders/account/SaveAccountToDatabaseSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/com/odaria/api/spigot/senders/account/SaveAccountToDatabaseSender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OdariaAPISpigot/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OdariaAPISpigot/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/OdariaAPISpigot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/OdariaAPISpigot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/ChangeServerStateSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/ChangeServerStateSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/AcceptFriendRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/AcceptFriendRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/DenyFriendRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/DenyFriendRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/SendFriendRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/friends/SendFriendRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/gui/friends/FriendsRequestsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/gui/friends/FriendsRequestsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/listeners/PlayerJoinListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/listeners/PlayerJoinListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/ChangeServerStateSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/server/ChangeServerStateSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/account/SaveAccountToDatabaseSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/odaria/api/spigot/senders/account/SaveAccountToDatabaseSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

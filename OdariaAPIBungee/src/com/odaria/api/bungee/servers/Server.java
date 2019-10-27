@@ -34,6 +34,10 @@ public class Server {
         return maxPlayers;
     }
 
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
+    }
+
     public ServerState getState() {
         return state;
     }

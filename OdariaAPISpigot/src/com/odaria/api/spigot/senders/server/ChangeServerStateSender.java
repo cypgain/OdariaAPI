@@ -1,4 +1,4 @@
-package com.odaria.api.spigot.senders;
+package com.odaria.api.spigot.senders.server;
 
 import com.odaria.api.commons.data.management.redis.RedisAccess;
 import com.odaria.api.commons.message.MessageAction;

@@ -111,48 +111,65 @@ public class AccountProvider {
 
     public void saveAccountToDatabase() throws SQLException {
         final Account account = getAccountFromRedis();
-        final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
+        if(account != null) {
+            final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
 
-        /* Save account */
-        new DatabaseQuery(connection)
-                .query("UPDATE users SET coins=? WHERE id=?")
-                .setInt(1, account.getCoins())
-                .setInt(2, account.getId())
-                .execute();
-
-        /* Save friends */
-        final PreparedStatement psf = new DatabaseQuery(connection)
-                .query("SELECT case when player_1=? then player_2 else player_1 end as friend FROM friends WHERE player_1=? OR player_2=?;")
-                .setString(1, player.getDisplayName())
-                .setString(2, player.getDisplayName())
-                .setString(3, player.getDisplayName())
-                .executeAndGet();
-        final ResultSet rsf = psf.executeQuery();
-
-        final List<String> friends = new ArrayList<>();
-        while(rsf.next()) {
-            friends.add(rsf.getString("friend"));
-
-        }
-        rsf.close();
-        account.setFriends(friends);
-
-        final  List<String> friendsToAdd = new ArrayList<>();
-        for(String friend : account.getFriends()) {
-            if(!(friends.contains(friend))) {
-                friendsToAdd.add(friend);
-            }
-        }
-
-        for(String friend : friendsToAdd) {
+            /* Save account */
             new DatabaseQuery(connection)
-                    .query("INSERT INTO friends (player_1, player_2) VALUES(?, ?)")
-                    .setString(1, player.getDisplayName())
-                    .setString(2, friend)
+                    .query("UPDATE users SET coins=? WHERE id=?")
+                    .setInt(1, account.getCoins())
+                    .setInt(2, account.getId())
                     .execute();
-        }
 
-        connection.close();
+            /* Save friends */
+            final PreparedStatement psf = new DatabaseQuery(connection)
+                    .query("SELECT case when player_1=? then player_2 else player_1 end as friend FROM friends WHERE player_1=? OR player_2=?;")
+                    .setString(1, player.getDisplayName())
+                    .setString(2, player.getDisplayName())
+                    .setString(3, player.getDisplayName())
+                    .executeAndGet();
+            final ResultSet rsf = psf.executeQuery();
+
+            final List<String> friends = new ArrayList<>();
+            while(rsf.next()) {
+                friends.add(rsf.getString("friend"));
+            }
+            rsf.close();
+
+            final List<String> friendsToAdd = new ArrayList<>();
+            for(String friend : account.getFriends()) {
+                if(!(friends.contains(friend))) {
+                    friendsToAdd.add(friend);
+                }
+            }
+
+            final List<String> friendsToRemove = new ArrayList<>();
+            for(String friend : friends) {
+                if(!(account.getFriends().contains(friend))) {
+                    friendsToRemove.add(friend);
+                }
+            }
+
+            for(String friend : friendsToAdd) {
+                new DatabaseQuery(connection)
+                        .query("INSERT INTO friends (player_1, player_2) VALUES(?, ?)")
+                        .setString(1, player.getDisplayName())
+                        .setString(2, friend)
+                        .execute();
+            }
+
+            for(String friend : friendsToRemove) {
+                new DatabaseQuery(connection)
+                        .query("DELETE FROM friends WHERE (player_1=? AND player_2=?) OR (player_1=? AND player_2=?)")
+                        .setString(1, player.getDisplayName())
+                        .setString(2, friend)
+                        .setString(3, friend)
+                        .setString(4, player.getDisplayName())
+                        .execute();
+            }
+
+            connection.close();
+        }
     }
 
     private Account createNewAccount() throws SQLException {

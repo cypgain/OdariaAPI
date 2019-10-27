@@ -9,7 +9,7 @@ public class Account implements Cloneable {
     private String username;
     private int coins;
     private List<String> friends;
-    private List<FriendRequest> friendsRequest;
+    private List<String> friendsRequest;
 
     /*
      * Empty Constructor for Redisson
@@ -42,7 +42,7 @@ public class Account implements Cloneable {
         return friends;
     }
 
-    public List<FriendRequest> getFriendsRequest() {
+    public List<String> getFriendsRequest() {
         return friendsRequest;
     }
 

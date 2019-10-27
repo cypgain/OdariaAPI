@@ -1,9 +1,12 @@
 package com.odaria.api.bungee;
 
+import com.odaria.api.bungee.commands.CloseAllServersCommand;
+import com.odaria.api.bungee.commands.SeeAllServersCommand;
 import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.data.management.sql.DatabaseManager;
 import com.odaria.api.bungee.listeners.game.ProxyQuitListener;
 import com.odaria.api.bungee.listeners.redis.RedisPubSubListener;
+import com.odaria.api.bungee.servers.ServersManager;
 import com.odaria.api.bungee.utils.ConsoleManager;
 import com.odaria.api.bungee.listeners.game.ProxyJoinListener;
 import com.odaria.api.commons.data.management.redis.RedisAccess;
@@ -38,6 +41,8 @@ public class OdariaAPIBungee extends Plugin {
         ConsoleManager.infoMessage("Commands loading...");
         loadCommands();
         ConsoleManager.successMessage("Commands loaded");
+
+        new ServersManager();
     }
 
     @Override
@@ -68,7 +73,8 @@ public class OdariaAPIBungee extends Plugin {
     }
 
     public void loadCommands() {
-
+        getProxy().getPluginManager().registerCommand(this, new CloseAllServersCommand());
+        getProxy().getPluginManager().registerCommand(this, new SeeAllServersCommand());
     }
 
 }

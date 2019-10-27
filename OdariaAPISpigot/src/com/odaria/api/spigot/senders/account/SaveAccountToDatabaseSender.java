@@ -3,7 +3,6 @@ package com.odaria.api.spigot.senders.account;
 import com.odaria.api.commons.data.management.redis.RedisAccess;
 import com.odaria.api.commons.message.MessageAction;
 import com.odaria.api.commons.message.RedisMessage;
-import org.bukkit.entity.Player;
 import org.redisson.api.RTopic;
 
 public class SaveAccountToDatabaseSender {

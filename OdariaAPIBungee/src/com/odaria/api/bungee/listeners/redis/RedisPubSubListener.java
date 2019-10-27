@@ -6,7 +6,10 @@ import com.odaria.api.bungee.listeners.redis.account.LoadAccountFromDatabaseList
 import com.odaria.api.bungee.listeners.redis.account.SaveAccountToDatabaseListener;
 import com.odaria.api.bungee.listeners.redis.friends.AcceptFriendRequestListener;
 import com.odaria.api.bungee.listeners.redis.friends.DenyFriendRequestListener;
+import com.odaria.api.bungee.listeners.redis.friends.RemoveFriendListener;
 import com.odaria.api.bungee.listeners.redis.friends.SendFriendRequestListener;
+import com.odaria.api.bungee.listeners.redis.server.ChangeServerStateListener;
+import com.odaria.api.bungee.listeners.redis.server.SendMaxPlayersListener;
 import com.odaria.api.commons.message.RedisMessage;
 
 import java.sql.SQLException;
@@ -35,6 +38,12 @@ public class RedisPubSubListener {
                 break;
             case DENY_FRIEND_REQUEST:
                 DenyFriendRequestListener.Action(redisMessage);
+                break;
+            case REMOVE_FRIEND:
+                RemoveFriendListener.Action(redisMessage);
+                break;
+            case SEND_MAX_PLAYERS:
+                SendMaxPlayersListener.Action(redisMessage);
                 break;
         }
     }

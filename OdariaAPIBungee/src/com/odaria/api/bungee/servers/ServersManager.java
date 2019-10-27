@@ -135,7 +135,7 @@ public class ServersManager {
         return false;
     }
 
-    private List<Server> getServers() {
+    public List<Server> getServers() {
         return servers;
     }
 
@@ -163,5 +163,9 @@ public class ServersManager {
         } else {
             return ".sh";
         }
+    }
+
+    public void resetServersList() {
+        servers.clear();
     }
 }
