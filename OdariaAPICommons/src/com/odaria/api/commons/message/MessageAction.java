@@ -1,5 +1,10 @@
 package com.odaria.api.commons.message;
 
 public enum MessageAction {
-    CHANGE_SERVER_STATE;
+    CHANGE_SERVER_STATE,
+    SAVE_ACCOUNT_TO_DATABASE,
+    LOAD_ACCOUNT_FROM_DATABASE,
+    SEND_FRIEND_REQUEST,
+    ACCEPT_FRIEND_REQUEST,
+    DENY_FRIEND_REQUEST;
 }

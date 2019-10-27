@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountProvider {
     public static final String REDIS_KEY = "account:";
@@ -61,11 +63,12 @@ public class AccountProvider {
         accountRBucket.delete();
     }
 
-    private Account getAccountFromDatabase() throws AccountNotFoundException {
+    public Account getAccountFromDatabase() throws AccountNotFoundException {
         Account account = null;
         try {
             final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
 
+            /* Load basics things account */
             final PreparedStatement ps = new DatabaseQuery(connection)
                     .query("SELECT * FROM users WHERE username=?")
                     .setString(1, player.getDisplayName())
@@ -77,13 +80,28 @@ public class AccountProvider {
                 final String username = rs.getString("username");
                 final int coins = rs.getInt("coins");
                 account = new Account(id, username, coins);
-
-
             } else {
                 account = createNewAccount();
             }
 
             ps.close();
+
+            /* Load friends */
+            final PreparedStatement psf = new DatabaseQuery(connection)
+                    .query("SELECT case when player_1=? then player_2 else player_1 end as friend FROM friends WHERE player_1=? OR player_2=?;")
+                    .setString(1, player.getDisplayName())
+                    .setString(2, player.getDisplayName())
+                    .setString(3, player.getDisplayName())
+                    .executeAndGet();
+            final ResultSet rsf = psf.executeQuery();
+
+            final List<String> friends = new ArrayList<>();
+            while(rsf.next()) {
+                friends.add(rsf.getString("friend"));
+            }
+            account.setFriends(friends);
+
+            psf.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,11 +113,44 @@ public class AccountProvider {
         final Account account = getAccountFromRedis();
         final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
 
+        /* Save account */
         new DatabaseQuery(connection)
                 .query("UPDATE users SET coins=? WHERE id=?")
                 .setInt(1, account.getCoins())
                 .setInt(2, account.getId())
                 .execute();
+
+        /* Save friends */
+        final PreparedStatement psf = new DatabaseQuery(connection)
+                .query("SELECT case when player_1=? then player_2 else player_1 end as friend FROM friends WHERE player_1=? OR player_2=?;")
+                .setString(1, player.getDisplayName())
+                .setString(2, player.getDisplayName())
+                .setString(3, player.getDisplayName())
+                .executeAndGet();
+        final ResultSet rsf = psf.executeQuery();
+
+        final List<String> friends = new ArrayList<>();
+        while(rsf.next()) {
+            friends.add(rsf.getString("friend"));
+
+        }
+        rsf.close();
+        account.setFriends(friends);
+
+        final  List<String> friendsToAdd = new ArrayList<>();
+        for(String friend : account.getFriends()) {
+            if(!(friends.contains(friend))) {
+                friendsToAdd.add(friend);
+            }
+        }
+
+        for(String friend : friendsToAdd) {
+            new DatabaseQuery(connection)
+                    .query("INSERT INTO friends (player_1, player_2) VALUES(?, ?)")
+                    .setString(1, player.getDisplayName())
+                    .setString(2, friend)
+                    .execute();
+        }
 
         connection.close();
     }

@@ -19,6 +19,7 @@ import java.util.UUID;
 public class ServersManager {
 
     public static ServersManager INSTANCE;
+    private static String OS = System.getProperty("os.name").toLowerCase();
 
     private List<Server> servers;
 
@@ -95,6 +96,7 @@ public class ServersManager {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+
         /* Remove server from the list */
         Server server = getServer(name);
         servers.remove(server);
@@ -137,7 +139,7 @@ public class ServersManager {
         return servers;
     }
 
-    private Server getServer(int port) {
+    public Server getServer(int port) {
         for(Server server : servers) {
             if(server.getPort() == port) {
                 return server;
@@ -146,7 +148,7 @@ public class ServersManager {
         return null;
     }
 
-    private Server getServer(String name) {
+    public Server getServer(String name) {
         for(Server server : servers) {
             if(server.getName().equalsIgnoreCase(name)) {
                 return server;
@@ -156,7 +158,7 @@ public class ServersManager {
     }
 
     private String getScriptExtension() {
-        if(OdariaAPIBungee.OS.equalsIgnoreCase("WINDOWS")) {
+        if(OS.contains("win")) {
             return ".bat";
         } else {
             return ".sh";

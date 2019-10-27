@@ -1,10 +1,15 @@
 package com.odaria.api.commons.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Account implements Cloneable {
 
     private int id;
     private String username;
     private int coins;
+    private List<String> friends;
+    private List<FriendRequest> friendsRequest;
 
     /*
      * Empty Constructor for Redisson
@@ -17,6 +22,8 @@ public class Account implements Cloneable {
         this.id = id;
         this.username = username;
         this.coins = coins;
+        friends = new ArrayList<>();
+        friendsRequest = new ArrayList<>();
     }
 
     public int getId() {
@@ -29,6 +36,14 @@ public class Account implements Cloneable {
 
     public int getCoins() {
         return coins;
+    }
+
+    public List<String> getFriends() {
+        return friends;
+    }
+
+    public List<FriendRequest> getFriendsRequest() {
+        return friendsRequest;
     }
 
     public void setId(int id) {
@@ -50,5 +65,9 @@ public class Account implements Cloneable {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
     }
 }

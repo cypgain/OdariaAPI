@@ -1,5 +1,6 @@
 package com.odaria.api.bungee;
 
+import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.data.management.sql.DatabaseManager;
 import com.odaria.api.bungee.listeners.game.ProxyQuitListener;
 import com.odaria.api.bungee.listeners.redis.RedisPubSubListener;
@@ -10,10 +11,12 @@ import net.md_5.bungee.api.plugin.Plugin;
 import org.redisson.api.RTopic;
 import org.redisson.api.listener.MessageListener;
 
+import java.sql.SQLException;
+
 public class OdariaAPIBungee extends Plugin {
 
-    public static final String OS = "WINDOWS";
     public static final String IP = "127.0.0.1";
+
     public static OdariaAPIBungee INSTANCE;
 
     @Override
@@ -53,7 +56,15 @@ public class OdariaAPIBungee extends Plugin {
         this.getProxy().getPluginManager().registerListener(this, new ProxyQuitListener());
 
         RTopic topic = RedisAccess.INSTANCE.getRedissonClient().getTopic(RedisAccess.CHANNEL);
-        topic.addListener((MessageListener<String>) (channel, message) -> new RedisPubSubListener().onRedisPubSubListener(channel, message));
+        topic.addListener((MessageListener<String>) (channel, message) -> {
+            try {
+                new RedisPubSubListener().onRedisPubSubListener(channel, message);
+            } catch (AccountNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void loadCommands() {

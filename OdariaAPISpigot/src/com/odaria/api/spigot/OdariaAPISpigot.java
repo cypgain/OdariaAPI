@@ -2,6 +2,7 @@ package com.odaria.api.spigot;
 
 import com.odaria.api.commons.data.management.redis.RedisAccess;
 import com.odaria.api.commons.servers.ServerState;
+import com.odaria.api.spigot.guimanager.GUIManager;
 import com.odaria.api.spigot.listeners.PlayerJoinListener;
 import com.odaria.api.spigot.senders.ChangeServerStateSender;
 import com.odaria.api.spigot.utils.ConsoleManager;
@@ -23,6 +24,8 @@ public class OdariaAPISpigot extends JavaPlugin {
         ConsoleManager.infoMessage("Listeners loading...");
         loadListeners();
         ConsoleManager.successMessage("Listeners loaded");
+
+        new GUIManager();
 
         ChangeServerStateSender.Action(Bukkit.getPort(), ServerState.OPEN);
     }
