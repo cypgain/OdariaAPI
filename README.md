@@ -88,10 +88,6 @@ getLeader() -- Recupere un String --> le nom du Chef du groupe
 
 #### Coins
 
-Ajouter des coins au joueur
-```java
-
-```
 Recuperer les coins du joueur (retourne un integer)
 ```java
 GetCoins.Action(Player player);
