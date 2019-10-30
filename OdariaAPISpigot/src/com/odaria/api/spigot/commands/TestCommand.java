@@ -1,6 +1,7 @@
 package com.odaria.api.spigot.commands;
 
 import com.odaria.api.spigot.friends.OpenFriendsGUI;
+import com.odaria.api.spigot.party.OpenPartyGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,7 +13,11 @@ public class TestCommand implements CommandExecutor {
         if(sender instanceof Player) {
             Player player = (Player) sender;
 
-            OpenFriendsGUI.Action(player);
+            if(args.length == 1) {
+                OpenFriendsGUI.Action(player);
+            } else {
+                OpenPartyGUI.Action(player);
+            }
         }
         return true;
     }

@@ -1,7 +1,7 @@
 package com.odaria.api.bungee;
 
-import com.odaria.api.bungee.commands.CloseAllServersCommand;
-import com.odaria.api.bungee.commands.SeeAllServersCommand;
+import com.google.common.collect.Maps;
+import com.odaria.api.bungee.commands.*;
 import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.data.management.sql.DatabaseManager;
 import com.odaria.api.bungee.listeners.game.ProxyQuitListener;
@@ -15,12 +15,15 @@ import org.redisson.api.RTopic;
 import org.redisson.api.listener.MessageListener;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public class OdariaAPIBungee extends Plugin {
 
     public static final String IP = "127.0.0.1";
 
     public static OdariaAPIBungee INSTANCE;
+
+    private Map<String, String> partyInvitation = Maps.newHashMap();
 
     @Override
     public void onEnable() {
@@ -75,6 +78,22 @@ public class OdariaAPIBungee extends Plugin {
     public void loadCommands() {
         getProxy().getPluginManager().registerCommand(this, new CloseAllServersCommand());
         getProxy().getPluginManager().registerCommand(this, new SeeAllServersCommand());
+        getProxy().getPluginManager().registerCommand(this, new AcceptPartyInvitCommand());
+        getProxy().getPluginManager().registerCommand(this, new DenyPartyInvitCommand());
+        getProxy().getPluginManager().registerCommand(this, new LoadAccountFromDatabaseCommand());
+        getProxy().getPluginManager().registerCommand(this, new SaveAccountToDatabaseCommand());
     }
 
+    public Map<String, String> getPartyInvitation() {
+        return partyInvitation;
+    }
+
+    public boolean playerHaveInvitation(String player, String playerLeader) {
+        for(Map.Entry<String, String> entry : partyInvitation.entrySet()) {
+            if(entry.getKey().equalsIgnoreCase(player) && entry.getValue().equalsIgnoreCase(playerLeader)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

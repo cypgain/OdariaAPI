@@ -1,6 +1,7 @@
 package com.odaria.api.spigot.core;
 
 import com.odaria.api.commons.core.Account;
+import com.odaria.api.commons.core.Rank;
 import com.odaria.api.commons.data.management.redis.RedisAccess;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
@@ -30,5 +31,20 @@ public class AccountProvider {
         final RBucket<Account> accountRBucket = redissonClient.getBucket(key);
 
         return accountRBucket.get();
+    }
+
+    public Rank getRankFromRedis(int rankId) {
+        final RedissonClient redissonClient = redisAccess.getRedissonClient();
+        final String key = "rank:" + rankId;
+        final RBucket<Rank> rankRBucket = redissonClient.getBucket(key);
+
+        return rankRBucket.get();
+    }
+
+    public boolean hasPermission(String permission) {
+        Account account = getAccountFromRedis();
+        int rankId = account.getRankId();
+        Rank rank = getRankFromRedis(rankId);
+        return rank.getPermissions().contains(permission);
     }
 }

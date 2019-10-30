@@ -10,6 +10,8 @@ public class Account implements Cloneable {
     private int coins;
     private List<String> friends;
     private List<String> friendsRequest;
+    private String partyLeader;
+    private int rankId;
 
     /*
      * Empty Constructor for Redisson
@@ -18,10 +20,12 @@ public class Account implements Cloneable {
 
     }
 
-    public Account(int id, String username, int coins) {
+    public Account(int id, String username, int coins, int rankId) {
         this.id = id;
         this.username = username;
         this.coins = coins;
+        this.partyLeader = null;
+        this.rankId = rankId;
         friends = new ArrayList<>();
         friendsRequest = new ArrayList<>();
     }
@@ -46,6 +50,10 @@ public class Account implements Cloneable {
         return friendsRequest;
     }
 
+    public String getPartyLeader() {
+        return partyLeader;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -58,6 +66,22 @@ public class Account implements Cloneable {
         this.coins = coins;
     }
 
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
+    }
+
+    public void setPartyLeader(String partyLeader) {
+        this.partyLeader = partyLeader;
+    }
+
+    public int getRankId() {
+        return rankId;
+    }
+
+    public void setRankId(int rankId) {
+        this.rankId = rankId;
+    }
+
     public Account clone() {
         try {
             return (Account) super.clone();
@@ -65,9 +89,5 @@ public class Account implements Cloneable {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public void setFriends(List<String> friends) {
-        this.friends = friends;
     }
 }

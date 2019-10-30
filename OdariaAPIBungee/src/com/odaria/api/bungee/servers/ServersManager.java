@@ -28,52 +28,49 @@ public class ServersManager {
         servers = new ArrayList<Server>();
     }
 
-    private void addServer(ServerType type, int minRam, int maxRam) {
-        OdariaAPIBungee.INSTANCE.getProxy().getScheduler().runAsync(OdariaAPIBungee.INSTANCE, new Runnable() {
-            @Override
-            public void run() {
-                /* Generate the server */
-                int port = generatePort();
-                String name = "mc" + port;
+    public Server addServer(ServerType type, int minRam, int maxRam) {
+            /* Generate the server */
+            int port = generatePort();
+            String name = "mc" + port;
 
-                InetSocketAddress address = new InetSocketAddress(OdariaAPIBungee.IP, port);
-                UUID uuid = UUID.randomUUID();
-                ServerInfo info = ProxyServer.getInstance().constructServerInfo(uuid.toString(), address, name, false);
-                OdariaAPIBungee.INSTANCE.getProxy().getServers().put(name, info);
+            InetSocketAddress address = new InetSocketAddress(OdariaAPIBungee.IP, port);
+            UUID uuid = UUID.randomUUID();
+            ServerInfo info = ProxyServer.getInstance().constructServerInfo(uuid.toString(), address, name, false);
+            OdariaAPIBungee.INSTANCE.getProxy().getServers().put(name, info);
 
-                Server server = new Server(name, type, ServerState.STARTING, port);
-                servers.add(server);
+            Server server = new Server(name, type, ServerState.STARTING, port);
+            servers.add(server);
 
-                /* Execute script newserver */
-                String newServerPath = System.getProperty("user.dir").replace("bungeecord", "").replace("\\", "/") + "scripts/newserver" + getScriptExtension() + " " + type.getTemplate() + " " + name;
-                try {
-                    Process p = Runtime.getRuntime().exec(newServerPath);
-                    p.waitFor();
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                /* Update server.properties */
-                String serverPropertiesPath = System.getProperty("user.dir").replace("\\", "/").replace("bungeecord", "") + "servers/" + name + "/server.properties";
-                Path path = Paths.get(serverPropertiesPath);
-                List<String> lines = null;
-                try {
-                    lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                lines.set(9, "server-port=" + port);
-                lines.set(15, "server-ip=" + OdariaAPIBungee.IP);
-                try {
-                    Files.write(path, lines, StandardCharsets.UTF_8);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                /* Launch the server */
-                launchServer(name, minRam, maxRam);
+            /* Execute script newserver */
+            String newServerPath = System.getProperty("user.dir").replace("bungeecord", "").replace("\\", "/") + "scripts/newserver" + getScriptExtension() + " " + type.getTemplate() + " " + name;
+            try {
+                Process p = Runtime.getRuntime().exec(newServerPath);
+                p.waitFor();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
             }
-        });
+
+            /* Update server.properties */
+            String serverPropertiesPath = System.getProperty("user.dir").replace("\\", "/").replace("bungeecord", "") + "servers/" + name + "/server.properties";
+            Path path = Paths.get(serverPropertiesPath);
+            List<String> lines = null;
+            try {
+                lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            lines.set(9, "server-port=" + port);
+            lines.set(15, "server-ip=" + OdariaAPIBungee.IP);
+            try {
+                Files.write(path, lines, StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            /* Launch the server */
+            launchServer(name, minRam, maxRam);
+
+            return server;
     }
 
     private void launchServer(String name, int minRam, int maxRam) {

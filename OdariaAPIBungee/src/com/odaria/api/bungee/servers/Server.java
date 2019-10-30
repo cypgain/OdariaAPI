@@ -10,6 +10,8 @@ public class Server {
     private int port;
     private int maxPlayers;
 
+    public int currentPlayerWaiting = 0;
+
     public Server(String name, ServerType type, ServerState state, int port) {
         this.name = name;
         this.type = type;

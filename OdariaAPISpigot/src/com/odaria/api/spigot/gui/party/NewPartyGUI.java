@@ -1,21 +1,17 @@
-package com.odaria.api.spigot.gui.friends;
+package com.odaria.api.spigot.gui.party;
 
 import com.odaria.api.spigot.friends.OpenFriendsGUI;
-import com.odaria.api.spigot.friends.RemoveFriend;
 import com.odaria.api.spigot.guimanager.GUI;
 import com.odaria.api.spigot.guimanager.GUIManager;
-import com.odaria.api.spigot.party.InvitePlayerParty;
+import com.odaria.api.spigot.party.NewParty;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class FriendActionGUI extends GUI {
-    private String actionPlayerName;
-
-    public FriendActionGUI(Player player, String actionPlayerName) {
-        super(GUIManager.INSTANCE, player, false, 54, actionPlayerName);
-        this.actionPlayerName = actionPlayerName;
+public class NewPartyGUI extends GUI {
+    public NewPartyGUI(Player player) {
+        super(GUIManager.INSTANCE, player, false, 54, "Creation d'un groupe");
     }
 
     @Override
@@ -30,21 +26,15 @@ public class FriendActionGUI extends GUI {
             Material mat = event.getCurrentItem().getType();
             ItemStack item = event.getCurrentItem();
             switch (mat) {
-                case ARROW:
-                    this.closeAndRemove();
-                    OpenFriendsGUI.Action(player);
-                    break;
                 case WOOD_DOOR:
                     this.closeAndRemove();
                     break;
                 case STAINED_CLAY:
                     this.closeAndRemove();
-                    if(item.getData().getData() == 14) {
-                        RemoveFriend.Action(player, event.getClickedInventory().getName());
+                    if(item.getData().getData() == 5) {
+                        NewParty.Action(player.getDisplayName());
+                        OpenFriendsGUI.Action(player);
                     }
-                    break;
-                case RAW_FISH:
-                    InvitePlayerParty.Action(getPlayer().getDisplayName(), event.getInventory().getName());
                     break;
             }
         }
@@ -63,10 +53,7 @@ public class FriendActionGUI extends GUI {
 
     @Override
     public void initializeItems() {
-        getInventory().setItem(0, createGuiItem(Material.ARROW, "Retour", "§aRetour à la liste des amis"));
         getInventory().setItem(8, createGuiItem(Material.WOOD_DOOR, "Fermer", "§aFermer la fenetre actuelle"));
-        getInventory().setItem(22, createGuiItem(Material.STAINED_CLAY, "§cSupprimer cet ami", 14));
-        getInventory().setItem(31, createGuiItem(Material.RAW_FISH, "§aInviter cet ami dans le groupe", 3));
+        getInventory().setItem(22, createGuiItem(Material.STAINED_CLAY, "§aNouveau groupe", 5, "Permet de créer un nouveau groupe"));
     }
 }
-

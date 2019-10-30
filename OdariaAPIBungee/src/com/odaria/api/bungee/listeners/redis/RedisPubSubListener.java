@@ -8,6 +8,9 @@ import com.odaria.api.bungee.listeners.redis.friends.AcceptFriendRequestListener
 import com.odaria.api.bungee.listeners.redis.friends.DenyFriendRequestListener;
 import com.odaria.api.bungee.listeners.redis.friends.RemoveFriendListener;
 import com.odaria.api.bungee.listeners.redis.friends.SendFriendRequestListener;
+import com.odaria.api.bungee.listeners.redis.game.JoinGameListener;
+import com.odaria.api.bungee.listeners.redis.party.InvitePlayerPartyListener;
+import com.odaria.api.bungee.listeners.redis.party.TeleportPlayersPartyListener;
 import com.odaria.api.bungee.listeners.redis.server.ChangeServerStateListener;
 import com.odaria.api.bungee.listeners.redis.server.SendMaxPlayersListener;
 import com.odaria.api.commons.message.RedisMessage;
@@ -44,6 +47,15 @@ public class RedisPubSubListener {
                 break;
             case SEND_MAX_PLAYERS:
                 SendMaxPlayersListener.Action(redisMessage);
+                break;
+            case INVITE_PLAYER_PARTY:
+                InvitePlayerPartyListener.Action(redisMessage);
+                break;
+            case TELEPORT_PLAYERS_PARTY:
+                TeleportPlayersPartyListener.Action(redisMessage);
+                break;
+            case JOIN_GAME:
+                JoinGameListener.Action(redisMessage);
                 break;
         }
     }
