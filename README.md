@@ -166,4 +166,20 @@ Retirer des OdaBox au joueur
 ```java
 new AccountProvider(String playerName).removeOdabox(int amount);
 ```
+### Compte Joueur
 
+Créer un AccountProvider
+```java
+Account account = new AccountProvider(String playerName);
+```
+
+Methodes de AccountProvider
+```java
+sendAccountToRedis(Account account); -- Retourne un type Account
+getAccountFromRedis();
+getRankFromRedis(int rankId) -- Retourne un type Rank
+hasPermission(String permission) -- Retourne un booléen
+addOdabox(int amount);
+removeOdabox(int amount);
+getOdabox() -- Retourne un int
+```
