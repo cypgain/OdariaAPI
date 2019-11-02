@@ -1,5 +1,20 @@
 # Documentation
 
+## Commandes
+
+```java
+/acceptpartyinvit <fromPlayer>
+/denypartyinvit <fromPlayer>
+/changeplayerrank <playerName> <rankId>
+/closeallservers
+/seeallservers
+/hub
+/loadaccountfromdatabase <playerName>
+/saveaccounttodatabase <playerName>
+```
+
+## Scripting
+
 ### Général
 
 Rejoindre un mini jeu
@@ -40,7 +55,7 @@ ServerType.getByName(String name)
 
 Modifier le grade du joueur
 ```java
-Not done
+ChangePlayerRank.Action(String playerName, int rankId);
 ```
 
 Ranks
