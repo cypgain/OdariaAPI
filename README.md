@@ -117,3 +117,21 @@ Modifier les coins du joueur
 ```java
 SetCoins.Action(Player player, int amount);
 ```
+
+#### Odabox
+
+Recuperer les OdaBox du joueur (retourne un integer)
+```java
+new AccountProvider(String playerName).getOdabox();
+```
+
+Ajouter des OdaBox au joueur
+```java
+new AccountProvider(String playerName).addOdabox(int amount);
+```
+
+Retirer des OdaBox au joueur
+```java
+new AccountProvider(String playerName).removeOdabox(int amount);
+```
+
