@@ -77,7 +77,7 @@ GetDatabaseCredentials.Action();
 
 Methodes de DatabaseCredentials
 ```java
-toURL() -- retourne l'url de connexion mysql
+toURL() -- retourne url de connexion mysql
 getHost()
 getUser()
 getPass()
