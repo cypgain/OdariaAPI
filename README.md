@@ -72,7 +72,17 @@ ServerType.getByName(String name)
 
 Recuperer les informations de connexion de la Base de données
 ```java
-Not Done
+GetDatabaseCredentials.Action();
+```
+
+Methodes de DatabaseCredentials
+```java
+toURL() -- retourne l'url de connexion mysql
+getHost()
+getUser()
+getPass()
+getDbName()
+getPort()
 ```
 
 Recuperer le groupe du joueur
