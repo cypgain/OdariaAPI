@@ -26,7 +26,12 @@ JoinGame.Action(ServerType type, Player player, int minRam, int maxRam)
 
 Changer le statut du serveur
 ```java 
-ChangeServerStateSender.Action(int port, ServerState state)
+ChangeServerStateSender.Action(ServerState state)
+```
+
+Envoyer le nombre maximum de joueurs
+```java 
+SendMaxPlayersSender.Action(int maxPlayers)
 ```
 
 Liste des statuts du serveur (ServerState)
