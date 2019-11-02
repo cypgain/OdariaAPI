@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AccountProvider {
     public static final String REDIS_KEY = "account:";
-    public static final Account DEFAULT_ACCOUNT = new Account(0, "", 0, 1);
+    public static final Account DEFAULT_ACCOUNT = new Account(0, "", 0, 1, 0);
 
     private RedisAccess redisAccess;
     private ProxiedPlayer player;
@@ -80,7 +80,8 @@ public class AccountProvider {
                 final String username = rs.getString("username");
                 final int coins = rs.getInt("coins");
                 final int rankId = rs.getInt("group_id");
-                account = new Account(id, username, coins, rankId);
+                final int odaBox = rs.getInt("odabox");
+                account = new Account(id, username, coins, rankId, odaBox);
             } else {
                 account = createNewAccount();
             }
@@ -117,10 +118,11 @@ public class AccountProvider {
 
             /* Save account */
             new DatabaseQuery(connection)
-                    .query("UPDATE users SET coins=?, rankId=? WHERE id=?")
+                    .query("UPDATE users SET coins=?, group_id=?, odabox=? WHERE id=?")
                     .setInt(1, account.getCoins())
                     .setInt(2, account.getRankId())
-                    .setInt(3, account.getId())
+                    .setInt(3, account.getOdaBox())
+                    .setInt(4, account.getId())
                     .execute();
 
             /* Save friends */
@@ -179,14 +181,14 @@ public class AccountProvider {
         final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
 
         new DatabaseQuery(connection)
-                .query("INSERT INTO users (username, coins, group_id) VALUES (?, ?, ?)")
+                .query("INSERT INTO users (username, coins, group_id, odabox) VALUES (?, ?, ?, 0)")
                 .setString(1, player.getDisplayName())
                 .setInt(2, 0)
                 .setInt(3, 1)
                 .execute();
 
         final PreparedStatement ps = new DatabaseQuery(connection)
-                .query("SELECT id, username, coins, group_id FROM users WHERE username=?")
+                .query("SELECT id, username, coins, group_id, odabox FROM users WHERE username=?")
                 .setString(1, player.getDisplayName())
                 .executeAndGet();
         final ResultSet rs = ps.executeQuery();
@@ -196,6 +198,7 @@ public class AccountProvider {
             account.setUsername(rs.getString("username"));
             account.setCoins(rs.getInt("coins"));
             account.setRankId(rs.getInt("group_id"));
+            account.setOdaBox(rs.getInt("odabox"));
         }
 
         ps.close();

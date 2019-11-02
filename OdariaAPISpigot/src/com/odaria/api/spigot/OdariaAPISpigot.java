@@ -4,6 +4,7 @@ import com.odaria.api.commons.data.management.redis.RedisAccess;
 import com.odaria.api.commons.servers.ServerState;
 import com.odaria.api.spigot.commands.TestCommand;
 import com.odaria.api.spigot.guimanager.GUIManager;
+import com.odaria.api.spigot.listeners.PlayerChatListener;
 import com.odaria.api.spigot.listeners.PlayerJoinListener;
 import com.odaria.api.spigot.senders.server.ChangeServerStateSender;
 import com.odaria.api.spigot.utils.ConsoleManager;
@@ -46,6 +47,7 @@ public class OdariaAPISpigot extends JavaPlugin {
 
     private void loadListeners() {
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerChatListener(), this);
     }
 
     private void loadCommands() {

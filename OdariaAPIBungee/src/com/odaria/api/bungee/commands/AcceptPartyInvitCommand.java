@@ -35,6 +35,8 @@ public class AcceptPartyInvitCommand extends Command {
                                 party.getPlayers().add(player.getDisplayName());
                                 partyProvider.savePlayerParty(party);
                                 playerLead.sendMessage(new TextComponent(player.getDisplayName() + " a rejoint votre groupe"));
+
+                                player.connect(playerLead.getServer().getInfo());
                             } else {
                                 player.sendMessage(new TextComponent("Il y a trop de joueur dans ce groupe"));
                             }

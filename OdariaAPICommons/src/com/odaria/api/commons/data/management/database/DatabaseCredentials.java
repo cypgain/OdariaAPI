@@ -1,4 +1,4 @@
-package com.odaria.api.bungee.data.management.sql;
+package com.odaria.api.commons.data.management.database;
 
 public class DatabaseCredentials {
 

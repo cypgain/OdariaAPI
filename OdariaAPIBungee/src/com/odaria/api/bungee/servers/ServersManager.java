@@ -26,6 +26,9 @@ public class ServersManager {
     public ServersManager() {
         INSTANCE = this;
         servers = new ArrayList<Server>();
+
+        CloseServersThread serversThread = new CloseServersThread();
+        serversThread.start();
     }
 
     public Server addServer(ServerType type, int minRam, int maxRam) {

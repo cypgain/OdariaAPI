@@ -2,6 +2,7 @@ package com.odaria.api.bungee;
 
 import com.google.common.collect.Maps;
 import com.odaria.api.bungee.commands.*;
+import com.odaria.api.bungee.core.RanksManager;
 import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.data.management.sql.DatabaseManager;
 import com.odaria.api.bungee.listeners.game.ProxyQuitListener;
@@ -46,6 +47,7 @@ public class OdariaAPIBungee extends Plugin {
         ConsoleManager.successMessage("Commands loaded");
 
         new ServersManager();
+        new RanksManager();
     }
 
     @Override
@@ -82,6 +84,7 @@ public class OdariaAPIBungee extends Plugin {
         getProxy().getPluginManager().registerCommand(this, new DenyPartyInvitCommand());
         getProxy().getPluginManager().registerCommand(this, new LoadAccountFromDatabaseCommand());
         getProxy().getPluginManager().registerCommand(this, new SaveAccountToDatabaseCommand());
+        getProxy().getPluginManager().registerCommand(this, new ChangePlayerRankCommand());
     }
 
     public Map<String, String> getPartyInvitation() {

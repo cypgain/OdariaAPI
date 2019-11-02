@@ -43,8 +43,35 @@ public class AccountProvider {
 
     public boolean hasPermission(String permission) {
         Account account = getAccountFromRedis();
-        int rankId = account.getRankId();
-        Rank rank = getRankFromRedis(rankId);
-        return rank.getPermissions().contains(permission);
+        if(account != null) {
+            int rankId = account.getRankId();
+            Rank rank = getRankFromRedis(rankId);
+            return rank.getPermissions().contains(permission);
+        }
+        return false;
+    }
+
+    public void addOdabox(int amount) {
+        Account account = getAccountFromRedis();
+        if(account != null) {
+            account.setOdaBox(account.getOdaBox() + amount);
+            sendAccountToRedis(account);
+        }
+    }
+
+    public void removeOdabox(int amount) {
+        Account account = getAccountFromRedis();
+        if(account != null) {
+            account.setOdaBox(account.getOdaBox() - amount);
+            sendAccountToRedis(account);
+        }
+    }
+
+    public int getOdabox() {
+        Account account = getAccountFromRedis();
+        if(account != null) {
+            return account.getOdaBox();
+        }
+        return 0;
     }
 }
