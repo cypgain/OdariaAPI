@@ -1,3 +1,6 @@
+OdariaAPIBungee: [Lien](https://mega.nz/#!IFNxGCRZ!GnmhIOhCmirmalr6hY_-GIop8K9h4qXr6TC4ZZ5TpGY)
+OdariaAPISpigot: [Lien](https://mega.nz/#!JRMRUAQa!x3ldfcpxilcQPoCXvJ2k6aRYimOnYlG0MiCsBPVlCzI)
+
 # Documentation
 
 ## Commandes
