@@ -175,8 +175,8 @@ AccountProvider account = new AccountProvider(String playerName);
 
 Methodes de AccountProvider
 ```java
-sendAccountToRedis(Account account); -- Retourne un type Account
-getAccountFromRedis();
+sendAccountToRedis(Account account); 
+getAccountFromRedis(); -- Retourne un type Account
 getRankFromRedis(int rankId) -- Retourne un type Rank
 hasPermission(String permission) -- Retourne un booléen
 addOdabox(int amount);
