@@ -1,47 +1,13 @@
 # Documentation
 
-Modifier le grade du joueur
-```java
-Not done
-```
-
-Ranks
-```java
-Ranks.ADMINISTRATOR_PLUS
-Ranks.ADMINISTRATOR
-Ranks.MODERATOR
-Ranks.DEVELOPER
-Ranks.GUIDE
-Ranks.BUILDER
-Ranks.VIP
-Ranks.PLAYER
-Ranks.getById(int id) -- Retourne le rank en Ã  partir de l'id (mÃªme id que la bdd)
-```
-
-Verifier si le joueur à une permission
-```java
-new AccountProvider(String player).hasPermission(String permission)
-```
+#### Général
 
 Rejoindre un mini jeu
 ```java 
 JoinGame.Action(ServerType type, Player player, int minRam, int maxRam)
 ```
 
-Ouvrir le menu des amis
-```java 
-OpenFriendsGUI.Action(Player player)
-```
-
-Ouvrir le menu du groupe
-```java 
-OpenPartyGUI.Action(Player player)
-```
-
-Teleporter les joueurs du groupe dans le mÃªme serveur que le leader
-```java
-TeleportAllPlayersParty.Action(Player leaderPlayer)
-```
+#### Serveurs
 
 Changer le statut du serveur
 ```java 
@@ -70,6 +36,63 @@ ServerType.GODOFODARIA_GAME
 ServerType.getByName(String name)
 ```
 
+#### Grades
+
+Modifier le grade du joueur
+```java
+Not done
+```
+
+Ranks
+```java
+Ranks.ADMINISTRATOR_PLUS
+Ranks.ADMINISTRATOR
+Ranks.MODERATOR
+Ranks.DEVELOPER
+Ranks.GUIDE
+Ranks.BUILDER
+Ranks.VIP
+Ranks.PLAYER
+Ranks.getById(int id) -- Retourne le rank en Ã  partir de l'id (mÃªme id que la bdd)
+```
+
+Verifier si le joueur à une permission
+```java
+new AccountProvider(String player).hasPermission(String permission)
+```
+
+#### Amis
+
+Ouvrir le menu des amis
+```java 
+OpenFriendsGUI.Action(Player player)
+```
+
+#### Groupe
+
+Ouvrir le menu du groupe
+```java 
+OpenPartyGUI.Action(Player player)
+```
+
+Teleporter les joueurs du groupe dans le mÃªme serveur que le leader
+```java
+TeleportAllPlayersParty.Action(Player leaderPlayer)
+```
+
+Recuperer le groupe du joueur
+```java
+new PartyProvider(String playerName).getPlayerParty();
+```
+
+Methodes de PlayersParty
+```java
+getPlayers() -- Retourne List<String> contenant les noms des joueurs dans le groupe
+getLeader() -- Recupere un String --> le nom du Chef du groupe
+```
+
+#### Base de données
+
 Recuperer les informations de connexion de la Base de données
 ```java
 GetDatabaseCredentials.Action();
@@ -83,17 +106,6 @@ getUser()
 getPass()
 getDbName()
 getPort()
-```
-
-Recuperer le groupe du joueur
-```java
-new PartyProvider(String playerName).getPlayerParty();
-```
-
-Methodes de PlayersParty
-```java
-getPlayers() -- Retourne List<String> contenant les noms des joueurs dans le groupe
-getLeader() -- Recupere un String --> le nom du Chef du groupe
 ```
 
 #### Coins
