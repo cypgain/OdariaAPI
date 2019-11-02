@@ -170,7 +170,7 @@ new AccountProvider(String playerName).removeOdabox(int amount);
 
 Créer un AccountProvider
 ```java
-Account account = new AccountProvider(String playerName);
+AccountProvider account = new AccountProvider(String playerName);
 ```
 
 Methodes de AccountProvider
