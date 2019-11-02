@@ -1,6 +1,6 @@
 # Documentation
 
-#### Général
+### Général
 
 Rejoindre un mini jeu
 ```java 
