@@ -7,7 +7,7 @@ Rejoindre un mini jeu
 JoinGame.Action(ServerType type, Player player, int minRam, int maxRam)
 ```
 
-#### Serveurs
+### Serveurs
 
 Changer le statut du serveur
 ```java 
@@ -36,7 +36,7 @@ ServerType.GODOFODARIA_GAME
 ServerType.getByName(String name)
 ```
 
-#### Grades
+### Grades
 
 Modifier le grade du joueur
 ```java
@@ -61,14 +61,14 @@ Verifier si le joueur à une permission
 new AccountProvider(String player).hasPermission(String permission)
 ```
 
-#### Amis
+### Amis
 
 Ouvrir le menu des amis
 ```java 
 OpenFriendsGUI.Action(Player player)
 ```
 
-#### Groupe
+### Groupe
 
 Ouvrir le menu du groupe
 ```java 
@@ -91,7 +91,7 @@ getPlayers() -- Retourne List<String> contenant les noms des joueurs dans le gro
 getLeader() -- Recupere un String --> le nom du Chef du groupe
 ```
 
-#### Base de données
+### Base de données
 
 Recuperer les informations de connexion de la Base de données
 ```java
@@ -108,7 +108,7 @@ getDbName()
 getPort()
 ```
 
-#### Coins
+### Coins
 
 Recuperer les coins du joueur (retourne un integer)
 ```java
@@ -130,7 +130,7 @@ Modifier les coins du joueur
 SetCoins.Action(Player player, int amount);
 ```
 
-#### Odabox
+### Odabox
 
 Recuperer les OdaBox du joueur (retourne un integer)
 ```java
