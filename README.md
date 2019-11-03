@@ -23,7 +23,7 @@ OdariaAPISpigot: [Lien](https://mega.nz/#!5I8TyRLa!WKgHSK2e4vt10G6YibBD5TaDgBxp3
 
 Rejoindre un mini jeu
 ```java 
-JoinGame.Action(ServerType type, Player player, int minRam, int maxRam)
+JoinGame.Action(ServerType type, Player player, int minRam, int maxRam, int maxPlayers)
 ```
 
 Téléporter tous les joueurs du serveur au hub
