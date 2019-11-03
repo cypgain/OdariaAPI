@@ -9,6 +9,7 @@ import com.odaria.api.bungee.listeners.redis.friends.DenyFriendRequestListener;
 import com.odaria.api.bungee.listeners.redis.friends.RemoveFriendListener;
 import com.odaria.api.bungee.listeners.redis.friends.SendFriendRequestListener;
 import com.odaria.api.bungee.listeners.redis.game.JoinGameListener;
+import com.odaria.api.bungee.listeners.redis.game.TeleportAllPlayersToHubListener;
 import com.odaria.api.bungee.listeners.redis.party.InvitePlayerPartyListener;
 import com.odaria.api.bungee.listeners.redis.party.TeleportPlayersPartyListener;
 import com.odaria.api.bungee.listeners.redis.server.ChangeServerStateListener;
@@ -56,6 +57,9 @@ public class RedisPubSubListener {
                 break;
             case JOIN_GAME:
                 JoinGameListener.Action(redisMessage);
+                break;
+            case TELEPORT_ALL_PLAYERS_TO_HUB:
+                TeleportAllPlayersToHubListener.Action(redisMessage);
                 break;
         }
     }

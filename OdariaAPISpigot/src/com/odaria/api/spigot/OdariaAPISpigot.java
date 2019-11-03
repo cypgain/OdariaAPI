@@ -6,7 +6,7 @@ import com.odaria.api.spigot.commands.TestCommand;
 import com.odaria.api.spigot.guimanager.GUIManager;
 import com.odaria.api.spigot.listeners.PlayerChatListener;
 import com.odaria.api.spigot.listeners.PlayerJoinListener;
-import com.odaria.api.spigot.senders.server.ChangeServerStateSender;
+import com.odaria.api.spigot.senders.server.ChangeServerState;
 import com.odaria.api.spigot.utils.ConsoleManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,7 +34,7 @@ public class OdariaAPISpigot extends JavaPlugin {
         GUIManager guiManager = new GUIManager();
         Bukkit.getPluginManager().registerEvents(guiManager, this);
 
-        ChangeServerStateSender.Action(Bukkit.getPort(), ServerState.OPEN);
+        ChangeServerState.Action(ServerState.OPEN);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class OdariaAPISpigot extends JavaPlugin {
         ConsoleManager.infoMessage("Redis closing...");
         RedisAccess.close();
         ConsoleManager.successMessage("Redis closed");
-        ChangeServerStateSender.Action(Bukkit.getPort(), ServerState.SHUTDOWN);
+        ChangeServerState.Action(ServerState.SHUTDOWN);
     }
 
     private void loadListeners() {

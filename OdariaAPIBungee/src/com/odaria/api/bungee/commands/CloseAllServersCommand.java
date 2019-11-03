@@ -1,5 +1,6 @@
 package com.odaria.api.bungee.commands;
 
+import com.odaria.api.bungee.OdariaAPIBungee;
 import com.odaria.api.bungee.servers.Server;
 import com.odaria.api.bungee.servers.ServersManager;
 import net.md_5.bungee.api.CommandSender;
@@ -15,14 +16,19 @@ public class CloseAllServersCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(sender instanceof ConsoleCommandSender) {
-            ServersManager serversManager = ServersManager.INSTANCE;
-            List<Server> servers = serversManager.getServers();
-            for(Server server : servers) {
-                serversManager.closeServer(server.getName());
-                System.out.println("Closing server " + server.getName());
+        OdariaAPIBungee.INSTANCE.getProxy().getScheduler().runAsync(OdariaAPIBungee.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                if(sender instanceof ConsoleCommandSender) {
+                    ServersManager serversManager = ServersManager.INSTANCE;
+                    List<Server> servers = serversManager.getServers();
+                    for(Server server : servers) {
+                        serversManager.closeServer(server.getName());
+                        System.out.println("Closing server " + server.getName());
+                    }
+                    serversManager.resetServersList();
+                }
             }
-            serversManager.resetServersList();
-        }
+        });
     }
 }

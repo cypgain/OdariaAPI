@@ -13,23 +13,28 @@ public class DenyPartyInvitCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(sender instanceof ProxiedPlayer) {
-            if(args.length == 1) {
-                ProxiedPlayer player = (ProxiedPlayer)sender;
-                String playerLead = args[0];
+        OdariaAPIBungee.INSTANCE.getProxy().getScheduler().runAsync(OdariaAPIBungee.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                if(sender instanceof ProxiedPlayer) {
+                    if(args.length == 1) {
+                        ProxiedPlayer player = (ProxiedPlayer)sender;
+                        String playerLead = args[0];
 
-                OdariaAPIBungee odariaAPIBungee = OdariaAPIBungee.INSTANCE;
-                if(odariaAPIBungee.playerHaveInvitation(player.getDisplayName(), playerLead)) {
-                    player.sendMessage(new TextComponent("Vous avez refusé l'invitation de groupe de " + playerLead));
-                    odariaAPIBungee.getPartyInvitation().remove(player.getDisplayName(), playerLead);
-                    ProxiedPlayer playerLeader = odariaAPIBungee.getProxy().getPlayer(playerLead);
-                    if(playerLeader != null) {
-                        playerLeader.sendMessage(new TextComponent(player.getDisplayName() + " a refusé votre invitation de groupe"));
+                        OdariaAPIBungee odariaAPIBungee = OdariaAPIBungee.INSTANCE;
+                        if(odariaAPIBungee.playerHaveInvitation(player.getDisplayName(), playerLead)) {
+                            player.sendMessage(new TextComponent("Vous avez refusé l'invitation de groupe de " + playerLead));
+                            odariaAPIBungee.getPartyInvitation().remove(player.getDisplayName(), playerLead);
+                            ProxiedPlayer playerLeader = odariaAPIBungee.getProxy().getPlayer(playerLead);
+                            if(playerLeader != null) {
+                                playerLeader.sendMessage(new TextComponent(player.getDisplayName() + " a refusé votre invitation de groupe"));
+                            }
+                        } else {
+                            player.sendMessage(new TextComponent("Vous n'avez aucune invitation de cette personne"));
+                        }
                     }
-                } else {
-                    player.sendMessage(new TextComponent("Vous n'avez aucune invitation de cette personne"));
                 }
             }
-        }
+        });
     }
 }

@@ -1,17 +1,23 @@
 package com.odaria.api.spigot.party;
 
 import com.odaria.api.commons.core.Party;
+import com.odaria.api.spigot.OdariaAPISpigot;
 import com.odaria.api.spigot.core.PartyProvider;
 
 public class KickPlayerParty {
     public static void Action(String playerName, String playerToKick) {
-        PartyProvider partyProvider = new PartyProvider(playerName);
-        Party party = partyProvider.getPlayerParty();
+        OdariaAPISpigot.INSTANCE.getServer().getScheduler().runTaskAsynchronously(OdariaAPISpigot.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                PartyProvider partyProvider = new PartyProvider(playerName);
+                Party party = partyProvider.getPlayerParty();
 
-        if(party != null) {
-            if(party.getLeader().equalsIgnoreCase(playerName)) {
-                party.getPlayers().remove(playerToKick);
+                if(party != null) {
+                    if(party.getLeader().equalsIgnoreCase(playerName)) {
+                        party.getPlayers().remove(playerToKick);
+                    }
+                }
             }
-        }
+        });
     }
 }

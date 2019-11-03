@@ -1,5 +1,6 @@
 package com.odaria.api.bungee.commands;
 
+import com.odaria.api.bungee.OdariaAPIBungee;
 import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.listeners.redis.account.LoadAccountFromDatabaseListener;
 import com.odaria.api.bungee.listeners.redis.account.SaveAccountToDatabaseListener;
@@ -19,21 +20,26 @@ public class SaveAccountToDatabaseCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(sender instanceof ConsoleCommandSender) {
-            if(args.length != 1) {
-                try {
-                    RedisMessage redisMessage = new RedisMessage(MessageAction.SAVE_ACCOUNT_TO_DATABASE);
-                    redisMessage.setParam("playerName", args[0]);
-                    SaveAccountToDatabaseListener.Action(redisMessage);
-                    sender.sendMessage(new TextComponent("Account " + args[0] + " saved"));
-                } catch (AccountNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        OdariaAPIBungee.INSTANCE.getProxy().getScheduler().runAsync(OdariaAPIBungee.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                if(sender instanceof ConsoleCommandSender) {
+                    if(args.length != 1) {
+                        try {
+                            RedisMessage redisMessage = new RedisMessage(MessageAction.SAVE_ACCOUNT_TO_DATABASE);
+                            redisMessage.setParam("playerName", args[0]);
+                            SaveAccountToDatabaseListener.Action(redisMessage);
+                            sender.sendMessage(new TextComponent("Account " + args[0] + " saved"));
+                        } catch (AccountNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        sender.sendMessage(new TextComponent("Usage : /saveaccounttodatabase <username>"));
+                    }
                 }
-            } else {
-                sender.sendMessage(new TextComponent("Usage : /saveaccounttodatabase <username>"));
             }
-        }
+        });
     }
 }

@@ -21,35 +21,40 @@ public class ChangePlayerRankCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(sender instanceof ConsoleCommandSender) {
-            if(args.length == 2) {
-                try {
-                    String playerName = args[0];
-                    int rankId = Integer.parseInt(args[1]);
+        OdariaAPIBungee.INSTANCE.getProxy().getScheduler().runAsync(OdariaAPIBungee.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                if(sender instanceof ConsoleCommandSender) {
+                    if(args.length == 2) {
+                        try {
+                            String playerName = args[0];
+                            int rankId = Integer.parseInt(args[1]);
 
-                    ProxiedPlayer player = OdariaAPIBungee.INSTANCE.getProxy().getPlayer(playerName);
-                    if(player != null) {
-                        AccountProvider accountProvider = new AccountProvider(player);
-                        Account account = accountProvider.getAccountFromRedis();
-                        account.setRankId(rankId);
-                        accountProvider.sendAccountToRedis(account);
+                            ProxiedPlayer player = OdariaAPIBungee.INSTANCE.getProxy().getPlayer(playerName);
+                            if(player != null) {
+                                AccountProvider accountProvider = new AccountProvider(player);
+                                Account account = accountProvider.getAccountFromRedis();
+                                account.setRankId(rankId);
+                                accountProvider.sendAccountToRedis(account);
+                            }
+
+                            final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
+
+                            new DatabaseQuery(connection)
+                                    .query("UPDATE users SET group_id=? WHERE username=?")
+                                    .setInt(1, rankId)
+                                    .setString(2, playerName)
+                                    .execute();
+
+                            sender.sendMessage(new TextComponent("Vous avez changer le rang de "+ playerName));
+                        } catch(Exception e) {
+                            sender.sendMessage(new TextComponent("Probleme lors de l'execution : " + e.getMessage()));
+                        }
                     } else {
-                        final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
-
-                        new DatabaseQuery(connection)
-                                .query("UPDATE users SET group_id=? WHERE username=?")
-                                .setInt(1, rankId)
-                                .setString(2, playerName)
-                                .execute();
+                        sender.sendMessage(new TextComponent("Usage: /changeplayerrank <playerName> <rankId>"));
                     }
-
-                    sender.sendMessage(new TextComponent("Vous avez changer le rang de "+ playerName));
-                } catch(Exception e) {
-                    sender.sendMessage(new TextComponent("Probleme lors de l'execution : " + e.getMessage()));
                 }
-            } else {
-                sender.sendMessage(new TextComponent("Usage: /changeplayerrank <playerName> <rankId>"));
             }
-        }
+        });
     }
 }

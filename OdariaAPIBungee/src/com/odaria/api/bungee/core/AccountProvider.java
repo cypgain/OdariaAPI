@@ -3,7 +3,6 @@ package com.odaria.api.bungee.core;
 import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.data.management.sql.DatabaseManager;
 import com.odaria.api.bungee.data.management.sql.DatabaseQuery;
-import com.odaria.api.bungee.utils.ConsoleManager;
 import com.odaria.api.commons.core.Account;
 import com.odaria.api.commons.data.management.redis.RedisAccess;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class AccountProvider {
     public static final String REDIS_KEY = "account:";
-    public static final Account DEFAULT_ACCOUNT = new Account(0, "", 0, 1, 0);
+    public static final Account DEFAULT_ACCOUNT = new Account(0, "", 0, 1, 0, 0, 0);
 
     private RedisAccess redisAccess;
     private ProxiedPlayer player;
@@ -81,7 +80,9 @@ public class AccountProvider {
                 final int coins = rs.getInt("coins");
                 final int rankId = rs.getInt("group_id");
                 final int odaBox = rs.getInt("odabox");
-                account = new Account(id, username, coins, rankId, odaBox);
+                final int odapassExp = rs.getInt("odapass_exp");
+                final int odapassPalier = rs.getInt("odapass_palier");
+                account = new Account(id, username, coins, rankId, odaBox, odapassExp, odapassPalier);
             } else {
                 account = createNewAccount();
             }
@@ -118,11 +119,13 @@ public class AccountProvider {
 
             /* Save account */
             new DatabaseQuery(connection)
-                    .query("UPDATE users SET coins=?, group_id=?, odabox=? WHERE id=?")
+                    .query("UPDATE users SET coins=?, group_id=?, odabox=?, odapass_exp=?, odapass_palier=? WHERE id=?")
                     .setInt(1, account.getCoins())
                     .setInt(2, account.getRankId())
                     .setInt(3, account.getOdaBox())
-                    .setInt(4, account.getId())
+                    .setInt(4, account.getOdapassExp())
+                    .setInt(5, account.getOdapassPalier())
+                    .setInt(6, account.getId())
                     .execute();
 
             /* Save friends */
@@ -181,14 +184,14 @@ public class AccountProvider {
         final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
 
         new DatabaseQuery(connection)
-                .query("INSERT INTO users (username, coins, group_id, odabox) VALUES (?, ?, ?, 0)")
+                .query("INSERT INTO users (username, coins, group_id, odabox, odapass_exp, odapass_palier) VALUES (?, ?, ?, 0, 0, 0)")
                 .setString(1, player.getDisplayName())
                 .setInt(2, 0)
                 .setInt(3, 1)
                 .execute();
 
         final PreparedStatement ps = new DatabaseQuery(connection)
-                .query("SELECT id, username, coins, group_id, odabox FROM users WHERE username=?")
+                .query("SELECT * FROM users WHERE username=?")
                 .setString(1, player.getDisplayName())
                 .executeAndGet();
         final ResultSet rs = ps.executeQuery();
@@ -199,6 +202,8 @@ public class AccountProvider {
             account.setCoins(rs.getInt("coins"));
             account.setRankId(rs.getInt("group_id"));
             account.setOdaBox(rs.getInt("odabox"));
+            account.setOdapassExp(rs.getInt("odapass_exp"));
+            account.setOdapassPalier(rs.getInt("odapass_palier"));
         }
 
         ps.close();

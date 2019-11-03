@@ -13,6 +13,8 @@ public class Account implements Cloneable {
     private String partyLeader;
     private int rankId;
     private int odaBox;
+    private int odapassExp;
+    private int odapassPalier;
 
     /*
      * Empty Constructor for Redisson
@@ -21,13 +23,15 @@ public class Account implements Cloneable {
 
     }
 
-    public Account(int id, String username, int coins, int rankId, int odaBox) {
+    public Account(int id, String username, int coins, int rankId, int odaBox, int odapassExp, int odapassPalier) {
         this.id = id;
         this.username = username;
         this.coins = coins;
         this.partyLeader = null;
         this.rankId = rankId;
         this.odaBox = odaBox;
+        this.odapassExp = odapassExp;
+        this.odapassPalier = odapassPalier;
         friends = new ArrayList<>();
         friendsRequest = new ArrayList<>();
     }
@@ -64,6 +68,14 @@ public class Account implements Cloneable {
         return rankId;
     }
 
+    public int getOdapassExp() {
+        return odapassExp;
+    }
+
+    public int getOdapassPalier() {
+        return odapassPalier;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -90,6 +102,14 @@ public class Account implements Cloneable {
 
     public void setOdaBox(int odaBox) {
         this.odaBox = odaBox;
+    }
+
+    public void setOdapassExp(int odapassExp) {
+        this.odapassExp = odapassExp;
+    }
+
+    public void setOdapassPalier(int odapassPalier) {
+        this.odapassPalier = odapassPalier;
     }
 
     public Account clone() {

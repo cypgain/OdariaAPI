@@ -2,9 +2,7 @@ package com.odaria.api.spigot.listeners;
 
 import com.odaria.api.commons.core.Account;
 import com.odaria.api.commons.ranks.Ranks;
-import com.odaria.api.spigot.OdariaAPISpigot;
 import com.odaria.api.spigot.core.AccountProvider;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,12 +12,10 @@ public class PlayerChatListener implements Listener {
 
     @EventHandler
     public void onPlayerChatEvent(AsyncPlayerChatEvent e) {
-        Bukkit.getScheduler().runTaskAsynchronously(OdariaAPISpigot.INSTANCE, () -> {
-            Player player = e.getPlayer();
-            Account account = new AccountProvider(player.getDisplayName()).getAccountFromRedis();
-            Ranks rank = Ranks.getById(account.getRankId());
-            e.setFormat(rank.getName() + " " + player.getDisplayName() + "§7 > §f" + rank.getMessageFormat() + e.getMessage());
-        });
+        Player player = e.getPlayer();
+        Account account = new AccountProvider(player.getDisplayName()).getAccountFromRedis();
+        Ranks rank = Ranks.getById(account.getRankId());
+        e.setFormat(rank.getName() + " " + player.getDisplayName() + "§7 > §f" + rank.getMessageFormat() + e.getMessage());
     }
 
 }

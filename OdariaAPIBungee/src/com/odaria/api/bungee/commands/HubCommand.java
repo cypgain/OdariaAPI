@@ -17,27 +17,32 @@ public class HubCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(sender instanceof ProxiedPlayer) {
-            ProxiedPlayer player = (ProxiedPlayer)sender;
-            PartyProvider partyProvider = new PartyProvider(player);
-            Party party = partyProvider.getPlayerParty();
-            if(party != null) {
-                if(party.getLeader().equalsIgnoreCase(player.getDisplayName())){
-                    for(String pName : party.getPlayers()) {
-                        ProxiedPlayer p = OdariaAPIBungee.INSTANCE.getProxy().getPlayer(pName);
-                        if(p != null) {
-                            p.connect(ProxyServer.getInstance().getServerInfo("hub"));
-                            p.sendMessage(new TextComponent("Vous allez être téléporté au HUB"));
+        OdariaAPIBungee.INSTANCE.getProxy().getScheduler().runAsync(OdariaAPIBungee.INSTANCE, new Runnable() {
+            @Override
+            public void run() {
+                if(sender instanceof ProxiedPlayer) {
+                    ProxiedPlayer player = (ProxiedPlayer)sender;
+                    PartyProvider partyProvider = new PartyProvider(player);
+                    Party party = partyProvider.getPlayerParty();
+                    if(party != null) {
+                        if(party.getLeader().equalsIgnoreCase(player.getDisplayName())){
+                            for(String pName : party.getPlayers()) {
+                                ProxiedPlayer p = OdariaAPIBungee.INSTANCE.getProxy().getPlayer(pName);
+                                if(p != null) {
+                                    p.connect(ProxyServer.getInstance().getServerInfo("hub"));
+                                    p.sendMessage(new TextComponent("Vous allez être téléporté au HUB"));
+                                }
+                            }
+                        } else {
+                            player.sendMessage(new TextComponent("Uniquement le chef du groupe peux effectuer cette commande"));
                         }
+                    } else {
+                        player.sendMessage(new TextComponent("Vous allez être téléporté au HUB"));
+                        player.connect(ProxyServer.getInstance().getServerInfo("hub"));
                     }
-                } else {
-                    player.sendMessage(new TextComponent("Uniquement le chef du groupe peux effectuer cette commande"));
                 }
-            } else {
-                player.sendMessage(new TextComponent("Vous allez être téléporté au HUB"));
-                player.connect(ProxyServer.getInstance().getServerInfo("hub"));
             }
-        }
+        });
     }
 
 }
