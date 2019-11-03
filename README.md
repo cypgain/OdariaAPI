@@ -26,16 +26,21 @@ Rejoindre un mini jeu
 JoinGame.Action(ServerType type, Player player, int minRam, int maxRam)
 ```
 
+Téléporter tous les joueurs du serveur au hub
+```java 
+TeleportAllPlayersToHub.Action();
+```
+
 ### Serveurs
 
 Changer le statut du serveur
 ```java 
-ChangeServerStateSender.Action(ServerState state)
+ChangeServerState.Action(ServerState state)
 ```
 
 Envoyer le nombre maximum de joueurs
 ```java 
-SendMaxPlayersSender.Action(int maxPlayers)
+SendMaxPlayers.Action(int maxPlayers)
 ```
 
 Liste des statuts du serveur (ServerState)
@@ -134,12 +139,12 @@ getPort()
 
 Sauvegarder un compte de redis dans la base de données
 ```java
-SaveAccountToDatabaseSender.Action(String playerName);
+SaveAccountToDatabase.Action(String playerName);
 ```
 
 Charger un compte depuis la base de données vers redis
 ```java
-LoadAccountFromDatabaseSender.Action(String playerName);
+LoadAccountFromDatabase.Action(String playerName);
 ```
 
 ### Coins
@@ -184,7 +189,7 @@ new AccountProvider(String playerName).removeOdabox(int amount);
 
 Ajouter des récompenses - Demander à Tom ou Seb pour plus précision
 ```java
-AddRewardsSender.Action(List<String> players, int expMin, int expMax, int odaBox);
+AddRewards.Action(List<String> players, int expMin, int expMax, int odaBox);
 ```
 
 ### Compte Joueur
