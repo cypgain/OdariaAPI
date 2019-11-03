@@ -132,6 +132,16 @@ getDbName()
 getPort()
 ```
 
+Sauvegarder un compte de redis dans la base de données
+```java
+SaveAccountToDatabaseSender.Action(String playerName);
+```
+
+Charger un compte depuis la base de données vers redis
+```java
+LoadAccountFromDatabaseSender.Action(String playerName);
+```
+
 ### Coins
 
 Recuperer les coins du joueur (retourne un integer)
@@ -170,6 +180,13 @@ Retirer des OdaBox au joueur
 ```java
 new AccountProvider(String playerName).removeOdabox(int amount);
 ```
+### Récompenses
+
+Ajouter des récompenses - Demander à Tom ou Seb pour plus précision
+```java
+AddRewardsSender.Action(List<String> players, int expMin, int expMax, int odaBox);
+```
+
 ### Compte Joueur
 
 Créer un AccountProvider
