@@ -1,6 +1,6 @@
-OdariaAPIBungee: [Lien](https://mega.nz/#!odEljC6A!GaVFJRqzAhi606pUcgbhlYmOCe8X7fBoNqCqDBd3wJk)
+OdariaAPIBungee: [Lien](https://mega.nz/#!gZdWSa5A!OCDaOr2W9gIeXhaW2osCpoFSFS6yD3LLuTUFCSkYExs)
 
-OdariaAPISpigot: [Lien](https://mega.nz/#!cVdBzQLS!mPJCSv0kTvr_LnigZ2YARZYoSH4WoSjMN0ZI7vDmHYE)
+OdariaAPISpigot: [Lien](https://mega.nz/#!IIUiASRJ!HnGy_dRMoGNk52weFkMjTwK5U_iCPCYHzCiScfzGWuY)
 
 # Documentation
 
