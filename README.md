@@ -1,3 +1,7 @@
+OdariaAPIBungee: [Lien](https://mega.nz/#!gZdWSa5A!OCDaOr2W9gIeXhaW2osCpoFSFS6yD3LLuTUFCSkYExs)
+
+OdariaAPISpigot: [Lien](https://mega.nz/#!IIUiASRJ!HnGy_dRMoGNk52weFkMjTwK5U_iCPCYHzCiScfzGWuY)
+
 # Documentation
 
 ## Commandes
@@ -19,14 +23,24 @@
 
 Rejoindre un mini jeu
 ```java 
-JoinGame.Action(ServerType type, Player player, int minRam, int maxRam)
+JoinGame.Action(ServerType type, Player player, int minRam, int maxRam, int maxPlayers)
+```
+
+Téléporter tous les joueurs du serveur au hub
+```java 
+TeleportAllPlayersToHub.Action();
 ```
 
 ### Serveurs
 
 Changer le statut du serveur
 ```java 
-ChangeServerStateSender.Action(int port, ServerState state)
+ChangeServerState.Action(ServerState state)
+```
+
+Envoyer le nombre maximum de joueurs
+```java 
+SendMaxPlayers.Action(int maxPlayers)
 ```
 
 Liste des statuts du serveur (ServerState)
@@ -123,6 +137,16 @@ getDbName()
 getPort()
 ```
 
+Sauvegarder un compte de redis dans la base de données
+```java
+SaveAccountToDatabase.Action(String playerName);
+```
+
+Charger un compte depuis la base de données vers redis
+```java
+LoadAccountFromDatabase.Action(String playerName);
+```
+
 ### Coins
 
 Recuperer les coins du joueur (retourne un integer)
@@ -161,4 +185,27 @@ Retirer des OdaBox au joueur
 ```java
 new AccountProvider(String playerName).removeOdabox(int amount);
 ```
+### Récompenses
 
+Ajouter des récompenses - Demander à Tom ou Seb pour plus précision
+```java
+AddRewards.Action(List<String> players, int expMin, int expMax, int odaBox);
+```
+
+### Compte Joueur
+
+Créer un AccountProvider
+```java
+AccountProvider account = new AccountProvider(String playerName);
+```
+
+Methodes de AccountProvider
+```java
+sendAccountToRedis(Account account); 
+getAccountFromRedis(); -- Retourne un type Account
+getRankFromRedis(int rankId) -- Retourne un type Rank
+hasPermission(String permission) -- Retourne un booléen
+addOdabox(int amount);
+removeOdabox(int amount);
+getOdabox() -- Retourne un int
+```
