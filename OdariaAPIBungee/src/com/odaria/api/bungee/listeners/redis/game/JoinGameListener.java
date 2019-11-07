@@ -88,7 +88,8 @@ public class JoinGameListener {
                         if(full) {
                             int minRam = Integer.parseInt(redisMessage.getParam("minRam"));
                             int maxRam = Integer.parseInt(redisMessage.getParam("maxRam"));
-                            server = serversManager.addServer(type, minRam, maxRam);
+                            int maxPlayers = Integer.parseInt(redisMessage.getParam("maxPlayers"));
+                            server = serversManager.addServer(type, minRam, maxRam, maxPlayers);
                             player.sendMessage(new TextComponent("Veuillez patienter lors de la connexion au serveur..."));
                             if(playerParty != null) {
                                 server.currentPlayerWaiting += playerParty.getPlayers().size();

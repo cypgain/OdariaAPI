@@ -12,11 +12,12 @@ public class TestCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-
-            if(args.length == 1) {
-                OpenFriendsGUI.Action(player);
-            } else {
-                OpenPartyGUI.Action(player);
+            if(player.isOp()) {
+                if(args.length == 1) {
+                    OpenFriendsGUI.Action(player);
+                } else {
+                    OpenPartyGUI.Action(player);
+                }
             }
         }
         return true;

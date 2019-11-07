@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.redisson.api.RTopic;
 
 public class JoinGame {
-    public static void Action(ServerType serverType, Player player, int minRam, int maxRam) {
+    public static void Action(ServerType serverType, Player player, int minRam, int maxRam, int maxPlayers) {
         PartyProvider partyProvider = new PartyProvider(player.getDisplayName());
         Party party = partyProvider.getPlayerParty();
 
@@ -20,6 +20,7 @@ public class JoinGame {
                     .setParam("player", player.getDisplayName())
                     .setParam("minRam", String.valueOf(minRam))
                     .setParam("maxRam", String.valueOf(maxRam))
+                    .setParam("maxPlayers", String.valueOf(maxPlayers))
                     .toJSON();
             RTopic channel = RedisAccess.INSTANCE.getRedissonClient().getTopic(RedisAccess.CHANNEL);
             channel.publish(json);

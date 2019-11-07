@@ -4,10 +4,12 @@ import com.google.gson.Gson;
 import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.listeners.redis.account.LoadAccountFromDatabaseListener;
 import com.odaria.api.bungee.listeners.redis.account.SaveAccountToDatabaseListener;
+import com.odaria.api.bungee.listeners.redis.commands.ChangeValueListener;
 import com.odaria.api.bungee.listeners.redis.friends.AcceptFriendRequestListener;
 import com.odaria.api.bungee.listeners.redis.friends.DenyFriendRequestListener;
 import com.odaria.api.bungee.listeners.redis.friends.RemoveFriendListener;
 import com.odaria.api.bungee.listeners.redis.friends.SendFriendRequestListener;
+import com.odaria.api.bungee.listeners.redis.game.AddRewardsListener;
 import com.odaria.api.bungee.listeners.redis.game.JoinGameListener;
 import com.odaria.api.bungee.listeners.redis.game.TeleportAllPlayersToHubListener;
 import com.odaria.api.bungee.listeners.redis.party.InvitePlayerPartyListener;
@@ -60,6 +62,12 @@ public class RedisPubSubListener {
                 break;
             case TELEPORT_ALL_PLAYERS_TO_HUB:
                 TeleportAllPlayersToHubListener.Action(redisMessage);
+                break;
+            case CHANGE_VALUE_ACCOUNT:
+                ChangeValueListener.Action(redisMessage);
+                break;
+            case ADD_REWARDS:
+                AddRewardsListener.Action(redisMessage);
                 break;
         }
     }

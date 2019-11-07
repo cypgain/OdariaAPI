@@ -2,6 +2,7 @@ package com.odaria.api.spigot;
 
 import com.odaria.api.commons.data.management.redis.RedisAccess;
 import com.odaria.api.commons.servers.ServerState;
+import com.odaria.api.spigot.commands.ChangeValueCommand;
 import com.odaria.api.spigot.commands.TestCommand;
 import com.odaria.api.spigot.guimanager.GUIManager;
 import com.odaria.api.spigot.listeners.PlayerChatListener;
@@ -52,6 +53,7 @@ public class OdariaAPISpigot extends JavaPlugin {
 
     private void loadCommands() {
         this.getCommand("testspigot").setExecutor(new TestCommand());
+        this.getCommand("changevalue").setExecutor(new ChangeValueCommand());
     }
 
 }

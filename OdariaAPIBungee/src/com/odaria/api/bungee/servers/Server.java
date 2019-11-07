@@ -12,12 +12,12 @@ public class Server {
 
     public int currentPlayerWaiting = 0;
 
-    public Server(String name, ServerType type, ServerState state, int port) {
+    public Server(String name, ServerType type, ServerState state, int port, int maxPlayers) {
         this.name = name;
         this.type = type;
         this.state = state;
         this.port = port;
-        maxPlayers = 0;
+        this.maxPlayers = maxPlayers;
     }
 
     public String getName() {

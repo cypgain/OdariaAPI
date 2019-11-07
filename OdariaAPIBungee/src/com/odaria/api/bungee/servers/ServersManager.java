@@ -31,7 +31,7 @@ public class ServersManager {
         serversThread.start();
     }
 
-    public Server addServer(ServerType type, int minRam, int maxRam) {
+    public Server addServer(ServerType type, int minRam, int maxRam, int maxPlayers) {
             /* Generate the server */
             int port = generatePort();
             String name = "mc" + port;
@@ -41,7 +41,7 @@ public class ServersManager {
             ServerInfo info = ProxyServer.getInstance().constructServerInfo(uuid.toString(), address, name, false);
             OdariaAPIBungee.INSTANCE.getProxy().getServers().put(name, info);
 
-            Server server = new Server(name, type, ServerState.STARTING, port);
+            Server server = new Server(name, type, ServerState.STARTING, port, maxPlayers);
             servers.add(server);
 
             /* Execute script newserver */
