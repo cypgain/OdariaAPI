@@ -22,11 +22,13 @@ public class ProxyQuitListener implements Listener {
 
             final PartyProvider partyProvider = new PartyProvider(player);
             final Party party = partyProvider.getPlayerParty();
-            if(party.getLeader().equalsIgnoreCase(player.getDisplayName())) {
-                partyProvider.removeParty(party);
-            } else {
-                party.getPlayers().remove(player.getDisplayName());
-                partyProvider.savePlayerParty(party);
+            if(party != null) {
+                if(party.getLeader().equalsIgnoreCase(player.getDisplayName())) {
+                    partyProvider.removeParty(party);
+                } else {
+                    party.getPlayers().remove(player.getDisplayName());
+                    partyProvider.savePlayerParty(party);
+                }
             }
 
             final AccountProvider accountProvider = new AccountProvider(player);
