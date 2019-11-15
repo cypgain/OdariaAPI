@@ -1,6 +1,6 @@
-OdariaAPIBungee: [Lien](https://mega.nz/#!MdciiQxA!xDvqancB-Q7ppkeQOFsowTVOeecH9mw7mpKzyUng0Gg)
+OdariaAPIBungee: [Lien](https://mega.nz/#!QZkFFaya!leqOepRE0hhyfh6M902vdLAKxWvlVz7iaONpJ6jaFXo)
 
-OdariaAPISpigot: [Lien](https://mega.nz/#!1Vl21AqT!XS7DSfXcUheEuz2xitHBXGBKoZaiH9o3RkHPpKbe7fs)
+OdariaAPISpigot: [Lien](https://mega.nz/#!tRt11KbZ!MoT8CfAui2UCv20_W3yPOO--pAfOgNPQCAPVBH9_IXo)
 
 # Documentation
 
@@ -15,6 +15,7 @@ OdariaAPISpigot: [Lien](https://mega.nz/#!1Vl21AqT!XS7DSfXcUheEuz2xitHBXGBKoZaiH
 /hub
 /loadaccountfromdatabase <playerName>
 /saveaccounttodatabase <playerName>
+/checkonline <playerName>
 ```
 
 ## Scripting
@@ -208,4 +209,34 @@ hasPermission(String permission) -- Retourne un booléen
 addOdabox(int amount);
 removeOdabox(int amount);
 getOdabox() -- Retourne un int
+```
+
+### Compte God Of Odaria
+
+Recuperer/Sauvegarder le compte god of odaria
+```java
+GOOAccountProvider gooAccountProvider = new GOOAccountProvider(String playerName);
+GOOAccount gooAccount = gooAccountProvider.getGOOAccountFromRedis(); -- Pour recuperer
+
+gooAccountProvider.sendGOOAccountToRedis(gooAccount); -- Pour sauvegarder
+```
+
+Méthodes de GOOAccount
+```java
+getId()
+getUsername()
+getKills()
+getDeaths()
+getExp()
+getLevel()
+getBox()
+getKits()
+setId()
+setUsername()
+setKills()
+setDeaths()
+setExp()
+setLevel()
+setBox()
+setKits()
 ```
