@@ -210,3 +210,33 @@ addOdabox(int amount);
 removeOdabox(int amount);
 getOdabox() -- Retourne un int
 ```
+
+### Compte God Of Odaria
+
+Recuperer/Sauvegarder le compte god of odaria
+```java
+GOOAccountProvider gooAccountProvider = new GOOAccountProvider(String playerName);
+GOOAccount gooAccount = gooAccountProvider.getGOOAccountFromRedis(); -- Pour recuperer
+
+gooAccountProvider.sendGOOAccountToRedis(gooAccount); -- Pour sauvegarder
+```
+
+Méthodes de GOOAccount
+```java
+getId()
+getUsername()
+getKills()
+getDeaths()
+getExp()
+getLevel()
+getBox()
+getKits()
+setId()
+setUsername()
+setKills()
+setDeaths()
+setExp()
+setLevel()
+setBox()
+setKits()
+```
