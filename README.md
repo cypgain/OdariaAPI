@@ -15,6 +15,7 @@ OdariaAPISpigot: [Lien](https://mega.nz/#!1Vl21AqT!XS7DSfXcUheEuz2xitHBXGBKoZaiH
 /hub
 /loadaccountfromdatabase <playerName>
 /saveaccounttodatabase <playerName>
+/checkonline <playerName>
 ```
 
 ## Scripting
