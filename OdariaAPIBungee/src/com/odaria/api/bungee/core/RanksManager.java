@@ -34,6 +34,7 @@ public class RanksManager {
             public void run() {
                 try {
                     final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
+
                     for(Ranks rank : Ranks.values()) {
                         Rank redisRank = new Rank(rank.getGroupId());
                         final PreparedStatement ps = new DatabaseQuery(connection)
@@ -48,6 +49,8 @@ public class RanksManager {
 
                         sendRankToRedis(redisRank);
                     }
+
+                    connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

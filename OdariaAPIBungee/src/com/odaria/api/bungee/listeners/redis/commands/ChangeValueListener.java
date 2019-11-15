@@ -17,6 +17,8 @@ public class ChangeValueListener {
                     int value = Integer.parseInt(redisMessage.getParam("value"));
 
                     ProxiedPlayer player = OdariaAPIBungee.INSTANCE.getProxy().getPlayer(playerName);
+
+                    System.out.println("Rank change for " + playerName + " to " + value);
                     if(player != null) {
                         AccountProvider accountProvider = new AccountProvider(player);
                         Account account = accountProvider.getAccountFromRedis();

@@ -1,10 +1,8 @@
 package com.odaria.api.bungee.core;
 
-import com.odaria.api.bungee.data.management.exceptions.AccountNotFoundException;
 import com.odaria.api.bungee.data.management.exceptions.GOOAccountNotFoundException;
 import com.odaria.api.bungee.data.management.sql.DatabaseManager;
 import com.odaria.api.bungee.data.management.sql.DatabaseQuery;
-import com.odaria.api.commons.core.Account;
 import com.odaria.api.commons.core.GOOAccount;
 import com.odaria.api.commons.data.management.redis.RedisAccess;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -20,7 +18,7 @@ import java.util.List;
 
 public class GOOAccountProvider {
     public static final String REDIS_KEY = "gooaccount:";
-    public static final GOOAccount DEFAULT_GOOACCOUNT = new GOOAccount(0, "", 0, 0, 0, 1, 0);
+    public static final GOOAccount DEFAULT_GOOACCOUNT = new GOOAccount(0, "", 0, 0, 0, 0, 1);
 
     private RedisAccess redisAccess;
     private ProxiedPlayer player;
@@ -116,7 +114,8 @@ public class GOOAccountProvider {
         final Connection connection = DatabaseManager.ODARIA_MYSQL.getDatabaseAccess().getConnection();
 
         new DatabaseQuery(connection)
-                .query("INSERT INTO goo_users (username, kills, deaths, exp, level, box) VALUES (?, 0, 0, 0, 1, 0)")
+                .query("INSERT INTO goo_users (username, kills, deaths, exp, level, box) VALUES (?, 0, 0, 0, 0, 1)")
+                .setString(1, player.getDisplayName())
                 .execute();
 
         final PreparedStatement ps = new DatabaseQuery(connection)

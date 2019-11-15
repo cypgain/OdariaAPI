@@ -25,9 +25,9 @@ public class DatabaseAccess {
         hikariConfig.setUsername(databaseCredentials.getUser());
         hikariConfig.setPassword(databaseCredentials.getPass());
         hikariConfig.setMaxLifetime(600000L);
-        hikariConfig.setIdleTimeout(600000L);
-        hikariConfig.setLeakDetectionThreshold(30000L);
-        hikariConfig.setConnectionTimeout(30000L);
+        hikariConfig.setIdleTimeout(300000L);
+        hikariConfig.setLeakDetectionThreshold(300000L);
+        hikariConfig.setConnectionTimeout(10000L);
 
         this.hikariDataSource = new HikariDataSource(hikariConfig);
     }
