@@ -15,6 +15,7 @@ public class Account implements Cloneable {
     private int odaBox;
     private int odapassExp;
     private int odapassPalier;
+    private List<Integer> skywarsKits;
 
     /*
      * Empty Constructor for Redisson
@@ -34,6 +35,7 @@ public class Account implements Cloneable {
         this.odapassPalier = odapassPalier;
         friends = new ArrayList<>();
         friendsRequest = new ArrayList<>();
+        skywarsKits = new ArrayList<>();
     }
 
     public int getId() {
@@ -76,6 +78,10 @@ public class Account implements Cloneable {
         return odapassPalier;
     }
 
+    public List<Integer> getSkywarsKits() {
+        return skywarsKits;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -106,6 +112,10 @@ public class Account implements Cloneable {
 
     public void setOdapassExp(int odapassExp) {
         this.odapassExp = odapassExp;
+    }
+
+    public void setSkywarsKits(List<Integer> skywarsKits) {
+        this.skywarsKits = skywarsKits;
     }
 
     public void setOdapassPalier(int odapassPalier) {

@@ -23,86 +23,75 @@ public class JoinGameListener {
                 ServerType type = ServerType.getByName(redisMessage.getParam("serverType"));
                 String playerName = redisMessage.getParam("player");
                 ProxiedPlayer player = odariaAPIBungee.getProxy().getPlayer(playerName);
-
-
+                int maxPlayers = Integer.parseInt(redisMessage.getParam("maxPlayers"));
 
                 if(player != null) {
-                    PartyProvider playerPartyProvider = new PartyProvider(player);
-                    Party playerParty = playerPartyProvider.getPlayerParty();
+                    PartyProvider partyProvider = new PartyProvider(player);
+                    Party party = partyProvider.getPlayerParty();
 
-                    if(playerParty == null || playerParty.getLeader().equalsIgnoreCase(playerName)) {
+                    if(party == null || party.getLeader().equalsIgnoreCase(player.getDisplayName())) {
                         ServersManager serversManager = ServersManager.INSTANCE;
                         Server server;
 
                         boolean full = true;
+
+                        int playersCount = party == null ? 1 : party.getPlayers().size();
+
                         for(Server s : serversManager.getServers()) {
-                            if(playerParty != null) {
-                                if(s.getType() == type && s.getState() == ServerState.OPEN &&  odariaAPIBungee.getProxy().getServers().get(s.getName()).getPlayers().size() + playerParty.getPlayers().size() <= s.getMaxPlayers()) {
-                                    player.connect(odariaAPIBungee.getProxy().getServers().get(s.getName()));
-                                    teleportPlayersParty(playerName);
-                                    full = false;
-                                    break;
-                                } else if(s.getState() == ServerState.STARTING &&  s.getType() == type && s.currentPlayerWaiting + playerParty.getPlayers().size() <= s.getMaxPlayers()) {
-                                    s.currentPlayerWaiting++;
-                                    new java.util.Timer().schedule(
-                                            new java.util.TimerTask() {
-                                                @Override
-                                                public void run() {
-                                                    ProxiedPlayer p = odariaAPIBungee.getProxy().getPlayer(player.getDisplayName());
-                                                    if(p != null) {
-                                                        p.connect(odariaAPIBungee.getProxy().getServers().get(s.getName()));
-                                                        teleportPlayersParty(playerName);
+                            if(
+                                s.getType() == type &&
+                                s.getState() == ServerState.OPEN &&
+                                odariaAPIBungee.getProxy().getServers().get(s.getName()).getPlayers().size() + playersCount <= s.getMaxPlayers()
+                              ) {
+
+                                player.connect(odariaAPIBungee.getProxy().getServers().get(s.getName()));
+                                full = false;
+
+                                break;
+                            } else if(
+                                    s.getState() == ServerState.STARTING &&
+                                    s.getType() == type &&
+                                    s.currentPlayerWaiting + playersCount <= s.getMaxPlayers()
+                            ) {
+
+                                s.currentPlayerWaiting += playersCount;
+                                new java.util.Timer().schedule(
+                                        new java.util.TimerTask() {
+                                            @Override
+                                            public void run() {
+                                                if(party != null) {
+                                                    teleportPlayersParty(player.getDisplayName(), party, s.getName());
+                                                } else {
+                                                    if(odariaAPIBungee.getProxy().getPlayers().contains(player)) {
+                                                        player.connect(odariaAPIBungee.getProxy().getServers().get(s.getName()));
                                                     }
                                                 }
-                                            },
-                                            10000
-                                    );
-                                    full = false;
-                                    break;
-                                }
-                            } else {
-                                if(s.getType() == type && s.getState() == ServerState.OPEN &&  odariaAPIBungee.getProxy().getServers().get(s.getName()).getPlayers().size() < s.getMaxPlayers()) {
-                                    player.connect(odariaAPIBungee.getProxy().getServers().get(s.getName()));
-                                    full = false;
-                                    break;
-                                } else if(s.getState() == ServerState.STARTING &&  s.getType() == type && s.currentPlayerWaiting < s.getMaxPlayers()) {
-                                    s.currentPlayerWaiting++;
-                                    new java.util.Timer().schedule(
-                                            new java.util.TimerTask() {
-                                                @Override
-                                                public void run() {
-                                                    ProxiedPlayer p = odariaAPIBungee.getProxy().getPlayer(player.getDisplayName());
-                                                    if(p != null) {
-                                                        p.connect(odariaAPIBungee.getProxy().getServers().get(s.getName()));
-                                                    }
-                                                }
-                                            },
-                                            10000
-                                    );
-                                    full = false;
-                                    break;
-                                }
+                                            }
+                                        },
+                                        10000
+                                );
+                                full = false;
+                                break;
+
                             }
                         }
 
                         if(full) {
                             int minRam = Integer.parseInt(redisMessage.getParam("minRam"));
                             int maxRam = Integer.parseInt(redisMessage.getParam("maxRam"));
-                            int maxPlayers = Integer.parseInt(redisMessage.getParam("maxPlayers"));
-                            server = serversManager.addServer(type, minRam, maxRam, maxPlayers);
+                            server = serversManager.addServer(type, maxPlayers, minRam, maxRam);
                             player.sendMessage(new TextComponent("Veuillez patienter lors de la connexion au serveur..."));
-                            if(playerParty != null) {
-                                server.currentPlayerWaiting += playerParty.getPlayers().size();
-                            } else {
-                                server.currentPlayerWaiting++;
-                            }
+                            server.currentPlayerWaiting += playersCount;
                             new java.util.Timer().schedule(
                                     new java.util.TimerTask() {
                                         @Override
                                         public void run() {
-                                            if(odariaAPIBungee.getProxy().getPlayers().contains(player)) {
-                                                player.connect(odariaAPIBungee.getProxy().getServers().get(server.getName()));
-                                                teleportPlayersParty(playerName);
+                                            if(party != null) {
+                                                teleportPlayersParty(player.getDisplayName(), party, server.getName());
+                                            } else {
+                                                if(odariaAPIBungee.getProxy().getPlayers().contains(player)) {
+                                                    player.connect(odariaAPIBungee.getProxy().getServers().get(server.getName()));
+                                                }
                                             }
                                         }
                                     },
@@ -112,14 +101,22 @@ public class JoinGameListener {
                     } else {
                         player.sendMessage(new TextComponent("Vous n'etes pas chef du groupe"));
                     }
+
                 }
+
             }
         });
     }
 
-    public static void teleportPlayersParty(String playerName) {
-        RedisMessage message = new RedisMessage(MessageAction.JOIN_GAME);
-        message.setParam("playerName", playerName);
-        TeleportPlayersPartyListener.Action(message);
+    public static void teleportPlayersParty(String player, Party party, String serverName) {
+        OdariaAPIBungee odariaAPIBungee = OdariaAPIBungee.INSTANCE;
+        if(player.equalsIgnoreCase(party.getLeader())) {
+            for(String pName : party.getPlayers()) {
+                ProxiedPlayer p = odariaAPIBungee.getProxy().getPlayer(pName);
+                if(p != null) {
+                    p.connect(odariaAPIBungee.getProxy().getServers().get(serverName));
+                }
+            }
+        }
     }
 }

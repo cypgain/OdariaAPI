@@ -5,3 +5,4 @@ main: com.odaria.api.spigot.OdariaAPISpigot
 commands:
   testspigot:
   changevalue:
+  checkonline:

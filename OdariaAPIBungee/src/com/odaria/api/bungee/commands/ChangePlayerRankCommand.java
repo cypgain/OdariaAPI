@@ -47,6 +47,8 @@ public class ChangePlayerRankCommand extends Command {
                                     .execute();
 
                             sender.sendMessage(new TextComponent("Vous avez changer le rang de "+ playerName));
+							
+							connection.close();
                         } catch(Exception e) {
                             sender.sendMessage(new TextComponent("Probleme lors de l'execution : " + e.getMessage()));
                         }

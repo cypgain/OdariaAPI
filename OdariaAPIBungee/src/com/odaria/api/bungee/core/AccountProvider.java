@@ -105,6 +105,21 @@ public class AccountProvider {
             account.setFriends(friends);
 
             psf.close();
+
+            /* Load SkyWarsKits */
+            final PreparedStatement pss = new DatabaseQuery(connection)
+                    .query("SELECT kit_id FROM skywars_kits WHERE username=?;")
+                    .setString(1, player.getDisplayName())
+                    .executeAndGet();
+            final ResultSet rss = pss.executeQuery();
+
+            final List<Integer> skywarsKits = new ArrayList<>();
+            while(rss.next()) {
+                skywarsKits.add(rss.getInt("kit_id"));
+            }
+            account.setSkywarsKits(skywarsKits);
+
+            pss.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -172,6 +187,34 @@ public class AccountProvider {
                         .setString(2, friend)
                         .setString(3, friend)
                         .setString(4, player.getDisplayName())
+                        .execute();
+            }
+
+            /* Save SkyWars Kits */
+            final PreparedStatement pss = new DatabaseQuery(connection)
+                    .query("SELECT * FROM skywars_kits WHERE username=?;")
+                    .setString(1, player.getDisplayName())
+                    .executeAndGet();
+            final ResultSet rss = pss.executeQuery();
+
+            final List<Integer> skyWarsKits = new ArrayList<>();
+            while(rss.next()) {
+                skyWarsKits.add(rss.getInt("friend"));
+            }
+            rss.close();
+
+            final List<Integer> skyWarsKitsToAdd = new ArrayList<>();
+            for(Integer kit : account.getSkywarsKits()) {
+                if(!(skyWarsKitsToAdd.contains(kit))) {
+                    skyWarsKitsToAdd.add(kit);
+                }
+            }
+
+            for(Integer kit : skyWarsKitsToAdd) {
+                new DatabaseQuery(connection)
+                        .query("INSERT INTO skywars_kits (username, kit_id) VALUES(?, ?)")
+                        .setString(1, player.getDisplayName())
+                        .setInt(2, kit)
                         .execute();
             }
 

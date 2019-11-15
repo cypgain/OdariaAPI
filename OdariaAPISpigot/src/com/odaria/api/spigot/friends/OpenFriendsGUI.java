@@ -16,28 +16,25 @@ public class OpenFriendsGUI {
     public static final String REDIS_KEY = "account:";
 
     public static void Action(Player player) {
-        OdariaAPISpigot.INSTANCE.getServer().getScheduler().runTaskAsynchronously(OdariaAPISpigot.INSTANCE, new Runnable() {
-            @Override
-            public void run() {
-                Map<String, String> friends = new HashMap<>();
 
-                AccountProvider accountProvider = new AccountProvider(player.getDisplayName());
-                Account account = accountProvider.getAccountFromRedis();
+            Map<String, String> friends = new HashMap<>();
 
-                RedisAccess redisAccess = RedisAccess.INSTANCE;
+            AccountProvider accountProvider = new AccountProvider(player.getDisplayName());
+            Account account = accountProvider.getAccountFromRedis();
 
-                for(String friend : account.getFriends()) {
-                    Account currentFriendAccount = getAccountFromRedis(redisAccess, friend);
-                    if(currentFriendAccount != null) {
-                        friends.put(friend, "En ligne");
-                    } else {
-                        friends.put(friend, "Hors ligne");
-                    }
+            RedisAccess redisAccess = RedisAccess.INSTANCE;
+
+            for(String friend : account.getFriends()) {
+                Account currentFriendAccount = getAccountFromRedis(redisAccess, friend);
+                if(currentFriendAccount != null) {
+                    friends.put(friend, "En ligne");
+                } else {
+                    friends.put(friend, "Hors ligne");
                 }
-
-                new FriendsGUI(player, friends).openInventory();
             }
-        });
+
+            new FriendsGUI(player, friends).openInventory();
+
     }
 
     public static Account getAccountFromRedis(RedisAccess redisAccess, String playerName) {
